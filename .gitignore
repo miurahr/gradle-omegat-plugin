@@ -1,0 +1,4 @@
+.gradle
+.idea
+build/
+omegat.plugin.release.properties
