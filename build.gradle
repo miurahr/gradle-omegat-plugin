@@ -21,11 +21,18 @@ configurations {
 dependencies {
     compile gradleApi()
     compile localGroovy()
-    bundle fileTree('lib')
+    bundle fileTree('lib') {
+        exclude "sources/*.zip"
+    }
 }
 
 jar {
-    from (configurations.bundle.collect{ it.isDirectory() ? it : zipTree(it) })
+    from (configurations.bundle.collect { zipTree(it) }) {
+        exclude "META-INF/MANIFEST.MF"
+    }
+    manifest {
+        from {zipTree('lib/OmegaT.jar').find {it.name=="MANIFEST.MF"}}
+    }
 }
 
 compileGroovy {
