@@ -14,6 +14,9 @@ To apply the plugin, please add one of the following snippets to your `build.gra
 ```groovy
 buildscript {
     repositories {
+        maven {
+            url "https://dl.bintray.com/miurahr/maven/"
+        }
         jcenter()
     }
     dependencies {
@@ -22,6 +25,9 @@ buildscript {
 }
 apply plugin: 'com.omegat.gradle'
 ```
+Note:
+As in 20, Auguest, 2016, the plugin is located my bintray repository and not in jcenter nor
+official plugin repository.
 
 #### Step 2: Add the `translate` task closure to your `build.gradle` file
 
@@ -39,6 +45,12 @@ You can make your own custom task using `OmegatTask` type.
 Here is an example to run Java properties alignment from gradle task.
 
 ```groovy
+repositories {
+    maven {
+        url "https://dl.bintray.com/miurahr/maven/"
+    }
+    jcenter()
+}
 import org.omegat.gradle.OmegatTask
 
 task runOmegaT(type: OmegatTask) {
