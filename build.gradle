@@ -14,10 +14,12 @@ repositories {
     jcenter()
 }
 
+// Configuration for generating FatJar
 configurations {
     bundle
 }
 
+// Gradle plugins API
 dependencies {
     compile gradleApi()
     compile localGroovy()
@@ -27,9 +29,11 @@ dependencies {
 }
 
 jar {
+    // FatJar generation
     from (configurations.bundle.collect { zipTree(it) }) {
         exclude "META-INF/MANIFEST.MF"
     }
+    // Manifest properties are come from OmegaaT.jar
     manifest {
         from {zipTree('lib/OmegaT.jar').find {it.name=="MANIFEST.MF"}}
     }

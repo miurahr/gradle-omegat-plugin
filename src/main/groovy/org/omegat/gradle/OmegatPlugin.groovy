@@ -75,7 +75,7 @@ class OmegatPlugin implements Plugin<Project> {
                 }
 
                 def configName = OMEGAT_CONFIGURATION_NAME
-                addDependency(configName, 'org.omegat.gradle:gradle-omegat-plugin:0.9.0')
+                addDependency(configName, 'org.omegat.gradle:gradle-omegat-plugin:0.9.1')
                 addDependency(configName, 'org.languagetool:languagetool-core:3.3')
                 addDependency(configName, 'org.languagetool:hunspell-native-libs:2.9')
                 addDependency(configName, 'org.apache.lucene:lucene-analyzers-common:5.2.1')

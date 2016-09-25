@@ -2,6 +2,7 @@ apply plugin: 'maven'
 apply plugin: 'maven-publish'
 apply plugin: 'signing'
 
+// Ask password for GnuPG singing.
 boolean validProperty(propertyName) {
   try { project.property(propertyName) != null }
   catch (MissingPropertyException) { false }
@@ -68,6 +69,7 @@ bintray {
     }
 }
 
+// maven publish to local repository.(for test)
 uploadArchives {
     repositories.mavenDeployer {
         // for local maven
