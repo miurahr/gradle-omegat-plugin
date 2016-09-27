@@ -29,11 +29,11 @@ Note:
 As in 20, Auguest, 2016, the plugin is located my bintray repository and not in jcenter nor
 official plugin repository.
 
-#### Step 2: Add the `translate` task closure to your `build.gradle` file
+#### Step 2: Add the `omegat` configuration closure to your `build.gradle` file
 
 ```groovy
-translate{
-    projectDir "$projectDir"
+omegat {
+    projectDir project.rootDir
 }
 ```
 

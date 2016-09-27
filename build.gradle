@@ -11,32 +11,16 @@ apply plugin: 'maven'
 apply plugin: 'com.jfrog.bintray'
 
 repositories {
+    maven {
+        url "https://dl.bintray.com/omegat-org/maven"
+    }
     jcenter()
 }
 
-// Configuration for generating FatJar
-configurations {
-    bundle
-}
-
-// Gradle plugins API
 dependencies {
     compile gradleApi()
     compile localGroovy()
-    bundle fileTree('lib') {
-        exclude "sources/*"
-    }
-}
-
-jar {
-    // FatJar generation
-    from (configurations.bundle.collect { zipTree(it) }) {
-        exclude "META-INF/MANIFEST.MF"
-    }
-    // Manifest properties are come from OmegaaT.jar
-    manifest {
-        from {zipTree('lib/OmegaT.jar').find {it.name=="MANIFEST.MF"}}
-    }
+    runtime 'org.omegat:omegat:4.0.0-02'
 }
 
 compileGroovy {
