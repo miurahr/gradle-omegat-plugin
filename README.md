@@ -17,6 +17,9 @@ buildscript {
         maven {
             url "https://dl.bintray.com/miurahr/maven/"
         }
+        maven {
+            url "https://dl.bintray.com/omegat-org/maven/"
+        }
         jcenter()
     }
     dependencies {
@@ -48,6 +51,9 @@ Here is an example to run Java properties alignment from gradle task.
 repositories {
     maven {
         url "https://dl.bintray.com/miurahr/maven/"
+    }
+    maven {
+        url "https://dl.bintray.com/omegat-org/maven/"
     }
     jcenter()
 }
