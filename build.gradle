@@ -20,7 +20,7 @@ repositories {
 dependencies {
     compile gradleApi()
     compile localGroovy()
-    runtime 'org.omegat:omegat:4.0.0-02'
+    runtime 'org.omegat:omegat:4.0.1'
 }
 
 compileGroovy {
