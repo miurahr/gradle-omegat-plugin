@@ -69,7 +69,7 @@ class OmegatPlugin implements Plugin<Project> {
                         }
                     });
                 }
-                project.dependencies.add(OMEGAT_CONFIGURATION_NAME, 'org.omegat:omegat:4.0.0-02')
+                project.dependencies.add(OMEGAT_CONFIGURATION_NAME, 'org.omegat:omegat:4.1.0')
             }
         }
     }

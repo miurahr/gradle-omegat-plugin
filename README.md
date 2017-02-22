@@ -23,7 +23,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'org.omegat.gradle:gradle-omegat-plugin:0.9.0'
+        classpath 'org.omegat.gradle:gradle-omegat-plugin:0.9.4'
     }
 }
 apply plugin: 'com.omegat.gradle'
