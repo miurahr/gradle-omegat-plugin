@@ -1,5 +1,7 @@
 # Overview
 
+[![Join the chat at https://gitter.im/miurahr/gradle-omegat-plugin](https://badges.gitter.im/miurahr/gradle-omegat-plugin.svg)](https://gitter.im/miurahr/gradle-omegat-plugin?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 The OmegaT gradle plugin allow you to generate translation files from original source text
 with TMX translation memory DB.
 
