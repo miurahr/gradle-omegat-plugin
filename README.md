@@ -82,3 +82,48 @@ This will generate translation result in OmegaT target directory.
 ```bash
 $ ./gradlew cleanTranslation
 ```
+
+# Get involved
+
+## Send patch
+
+It is recommend to send a pull request to github project as usual.
+
+## Discussion
+
+There is a gitter chat room for this project.
+
+## IDE
+
+Original author uses JetBrains IntelliJ IDEA community edition
+for development. Thanks JetBrains for providing great IDE for
+OSS community.
+
+
+## Release procedure
+
+### Update version and dependency
+
+Edit `gradle.properties` for artifact version increment.
+Also edit `src/main/resources/org/omegat/gradle/omegat.properties` for
+dependency versions. This text is used both Gradle build script and
+plugin source.
+
+### Test artifact
+
+Run
+```
+$ ./gradlew uploadArchives
+```
+then gradle installes artifact into your local maven repository.
+This effects your development environment to support new test version
+is accesible from your test project.
+
+### Upload artifact
+
+After you satisfy test result, you can upload the artifact onto bintray
+maven repository.
+```
+$ ./graldew bintrayUpload
+```
+
