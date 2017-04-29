@@ -36,7 +36,7 @@ class OmegatPlugin implements Plugin<Project> {
 
 
     @Override
-    def void apply(Project project) {
+    void apply(Project project) {
         this.project = project
 
         project.extensions.create("omegat", OmegatPluginExtension)
@@ -60,19 +60,19 @@ class OmegatPlugin implements Plugin<Project> {
             }
 
             afterEvaluate {
+                Properties props = new Properties()
+                props.load(OmegatPlugin.class.getResourceAsStream("omegat.properties"))
                 if (project.repositories.isEmpty()) {
                     project.repositories.jcenter()
                     project.repositories.maven(new Action<MavenArtifactRepository>() {
                         @Override
-                        public void execute(MavenArtifactRepository mavenArtifactRepository) {
-                            mavenArtifactRepository.setUrl("https://dl.bintray.com/omegat-org/maven");
+                        void execute(MavenArtifactRepository mavenArtifactRepository) {
+                            mavenArtifactRepository.setUrl(props.getProperty("mavenRepositoryUrl"))
                         }
-                    });
+                    })
                 }
-                Properties props = new Properties()
-                props.load(OmegatPlugin.class.getResourceAsStream("omegat.properties"))
                 project.dependencies.add(OMEGAT_CONFIGURATION_NAME,
-                        'org.omegat:omegat:' + props.getProperty("omegatVersion"))
+                        props.getProperty("dependency"))
             }
         }
     }
