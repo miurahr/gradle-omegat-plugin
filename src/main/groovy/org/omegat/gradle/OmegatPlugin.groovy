@@ -69,7 +69,10 @@ class OmegatPlugin implements Plugin<Project> {
                         }
                     });
                 }
-                project.dependencies.add(OMEGAT_CONFIGURATION_NAME, 'org.omegat:omegat:4.1.0')
+                Properties props = new Properties()
+                props.load(OmegatPlugin.class.getResourceAsStream("omegat.properties"))
+                project.dependencies.add(OMEGAT_CONFIGURATION_NAME,
+                        'org.omegat:omegat:' + props.getProperty("omegatVersion"))
             }
         }
     }

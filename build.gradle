@@ -8,6 +8,12 @@ plugins {
 group = 'org.omegat.gradle'
 version = currentVersion
 
+file("$rootDir/src/main/resources/org/omegat/gradle/omegat.properties").withReader {
+   Properties props = new Properties()
+   props.load(it)
+   project.ext.omegatVersion = props.getProperty("omegatVersion")
+}
+
 apply plugin: 'groovy'
 apply plugin: 'maven'
 apply plugin: 'com.jfrog.bintray'
@@ -25,7 +31,7 @@ repositories {
 dependencies {
     compile gradleApi()
     compile localGroovy()
-    runtime 'org.omegat:omegat:4.1.0'
+    runtime 'org.omegat:omegat:' + omegatVersion
 }
 
 compileGroovy {
@@ -42,7 +48,7 @@ task createReleasePropertiesFile(type:Exec) {
     String fileName = 'omegat.plugin.release.properties'
     println "Creating $fileName"
     String fileContent = "version=$currentVersion"
-    (new File("$rootDir/src/main/resources/$fileName")).write(fileContent)
+    (new File("$rootDir/$fileName")).write(fileContent)
 }
 
 artifacts {
@@ -170,7 +176,8 @@ String askPassword(prompt) {
         }
     } else {
         System.console().println()
-        keyPass = System.console().readPassword(prompt)
+        System.console().println(prompt)
+        keyPass = System.console().readPassword()
     }
     if (keyPass.size() <= 0) {
         throw new InvalidUserDataException("You must enter the passwords to proceed.")
@@ -182,7 +189,7 @@ String askPassword(prompt) {
 gradle.taskGraph.whenReady { taskGraph ->
     if (taskGraph.allTasks.any { it instanceof Sign }) {
         allprojects {
-            ext.'signing.password' = askPassword("Enter password for PGP key ${property('signing.keyId')}: ")
+            ext.'signing.password' = askPassword("Enter password for PGP key ${property('signing.keyId')}")
         }
     }
 }
