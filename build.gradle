@@ -57,10 +57,6 @@ artifacts {
     archives sourceJar
 }
 
-task wrapper(type: Wrapper, description: 'Gradle Wrapper task') {
-    gradleVersion = '3.0'
-}
-
 signing {
     required { gradle.taskGraph.hasTask("uploadArchives") ||
             gradle.taskGraph.hasTask("githubRelease") ||
@@ -153,44 +149,3 @@ uploadArchives {
     }
 }
 
-// askPassword - guarantee asking only once.
-ext {
-    askPassword = ''
-}
-String askPassword(prompt) {
-    if (ext.'askPassword' != '') {
-        return ext.'askPassword'
-    }
-    def keyPass = ''
-    if(System.console() == null) {
-        new SwingBuilder().edt {
-            dialog(modal: true, title: 'Enter password', alwaysOnTop: true, resizable: false, locationRelativeTo: null, pack: true, show: true) {
-                vbox {
-                    label(text: prompt)
-                    def input1 = passwordField()
-                    button(defaultButton: true, text: 'OK', actionPerformed: {
-                        keyPass = input1.password;
-                        dispose();
-                    })
-                }
-            }
-        }
-    } else {
-        System.console().println()
-        System.console().println(prompt)
-        keyPass = System.console().readPassword()
-    }
-    if (keyPass.size() <= 0) {
-        throw new InvalidUserDataException("You must enter the passwords to proceed.")
-    }
-    ext.'askPassword' = new String(keyPass)
-    new String(keyPass)
-}
-
-gradle.taskGraph.whenReady { taskGraph ->
-    if (taskGraph.allTasks.any { it instanceof Sign }) {
-        allprojects {
-            ext.'signing.password' = askPassword("Enter password for PGP key ${property('signing.keyId')}")
-        }
-    }
-}
