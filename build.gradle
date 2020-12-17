@@ -1,12 +1,16 @@
-import groovy.swing.SwingBuilder
-
 plugins {
-    // bintray
-    id "com.jfrog.bintray" version "1.6"
+    id "groovy"
+    id "com.jfrog.bintray" version "1.8.5"
+    id "maven"
+    id "maven-publish"
+    id "signing"
+    id 'groovy-gradle-plugin'
+    id "com.gradle.plugin-publish" version "0.12.0"
 }
 
 group = 'org.omegat.gradle'
 version = currentVersion
+ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
 
 file("$rootDir/src/main/resources/org/omegat/gradle/omegat.properties").withReader {
     Properties props = new Properties()
@@ -15,12 +19,27 @@ file("$rootDir/src/main/resources/org/omegat/gradle/omegat.properties").withRead
     project.ext.omegatRepositoryUrl = props.getProperty("mavenRepositoryUrl")
 }
 
-apply plugin: 'groovy'
-apply plugin: 'maven'
-apply plugin: 'com.jfrog.bintray'
-apply plugin: 'maven'
-apply plugin: 'maven-publish'
-apply plugin: 'signing'
+
+gradlePlugin {
+    plugins {
+        omegatPlugin {
+            id = 'gradle-omegat-plugin'
+            implementationClass = 'org.omegat.gradle.OmegatPlugin'
+        }
+    }
+}
+
+pluginBundle {
+    vcsUrl = 'https://github.com/omegat-org/gralde-omegat-plugin'
+    website = 'https://github.com/omegat-org/gradle-omegat-plugin'
+    description = 'A plugin to support OmegaT on your project'
+    tags = ['OmegaT']
+    plugins {
+        omegatPlugin {
+            displayName = 'OmegaT plugin'
+        }
+    }
+}
 
 repositories {
     maven {
@@ -30,19 +49,17 @@ repositories {
 }
 
 dependencies {
-    compile gradleApi()
-    compile localGroovy()
+    compileOnly gradleApi()
+    compileOnly localGroovy()
     runtime omegatDependency
 }
 
-compileGroovy {
-    sourceCompatibility = '1.8'
-    targetCompatibility = '1.8'
+tasks.withType(GroovyCompile) {
+    groovyOptions.forkOptions.memoryMaximumSize = '256m'
 }
 
 task sourceJar(type: Jar) {
     from sourceSets.main.allSource
-    classifier = 'sources'
 }
 
 task createReleasePropertiesFile(type:Exec) {
@@ -58,9 +75,8 @@ artifacts {
 }
 
 signing {
-    required { gradle.taskGraph.hasTask("uploadArchives") ||
-            gradle.taskGraph.hasTask("githubRelease") ||
-            gradle.taskGraph.hasTask("bintrayUpload")}
+    useGpgCmd()
+    required { isReleaseVersion }
     sign configurations.archives
 }
 
@@ -113,39 +129,3 @@ bintray {
         publicDownloadNumbers = true
     }
 }
-
-// maven publish to local repository.(for test)
-uploadArchives {
-    repositories.mavenDeployer {
-        // for local maven
-        repository url: "file://$System.env.HOME/.m2/repository"
-        beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
-        pom.project {
-            name = project.name
-            packaging = 'jar'
-            description = projectDesc
-            url = projectUrl
-            version = project.version
-            licenses {
-                license {
-                    name = 'GNU General Public License, Version 3'
-                    url  = 'https://www.gnu.org/licenses/gpl.html'
-                    distribution = 'repo'
-                }
-            }
-            scm {
-                url = githubUrl
-                connection = "scm:git:${githubUrl}"
-                developerConnection = "scm:git:${githubUrl}"
-            }
-            developers {
-                developer {
-                    id = projectOwner
-                    name = projectOwnerFullName
-                    email = projectOwnerEmail
-                }
-            }
-        }
-    }
-}
-
