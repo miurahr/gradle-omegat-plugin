@@ -131,5 +131,15 @@ bintray {
         licenses = ['GPL-3.0']
         labels = ['java', 'OmegaT', 'translation', 'Translation Memory', 'CAT', 'Gradle', 'Bundle', 'resources', 'localize']
         publicDownloadNumbers = true
+        version {
+            name = project.version
+            csTag = "v${project.version}"
+            attributes = ["gradle-plugin": "org.omegat.gradle"]
+        }
     }
+}
+
+// see https://github.com/bintray/gradle-bintray-plugin/issues/300
+Signature.metaClass.getToSignArtifact = { ->
+    return (delegate as Signature).source
 }
