@@ -74,10 +74,14 @@ artifacts {
     archives sourceJar
 }
 
-signing {
-    useGpgCmd()
-    required { isReleaseVersion }
-    sign configurations.archives
+// The Gradle plugin portal doesn't allow signature files.
+// bintray is configured to do automate signing
+if (!gradle.startParameter.taskNames.intersect(['publishPlugins', 'bintray'])) {
+    signing {
+        useGpgCmd()
+        required { isReleaseVersion }
+        sign configurations.archives
+    }
 }
 
 install {
