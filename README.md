@@ -12,21 +12,9 @@ Please follow the below steps to add the Gradle OmegaT Plugin to your Gradle bui
 To apply the plugin, please add one of the following snippets to your `build.gradle` file:
 
 ```groovy
-buildscript {
-    repositories {
-        maven {
-            url "https://dl.bintray.com/miurahr/maven/"
-        }
-        maven {
-            url "https://dl.bintray.com/omegat-org/maven/"
-        }
-        jcenter()
-    }
-    dependencies {
-        classpath 'org.omegat.gradle:gradle-omegat-plugin:0.9.6'
-    }
+plugins {
+    id 'org.omegat.gradle' version '1.0.0'
 }
-apply plugin: 'gradle-omegat-plugin'
 ```
 Note:
 As in 20, Auguest, 2016, the plugin is located my bintray repository and not in jcenter nor
@@ -49,12 +37,6 @@ Here is an example to run Java properties' alignment from gradle task.
 
 ```groovy
 repositories {
-    maven {
-        url "https://dl.bintray.com/miurahr/maven/"
-    }
-    maven {
-        url "https://dl.bintray.com/omegat-org/maven/"
-    }
     jcenter()
 }
 import org.omegat.gradle.OmegatTask
