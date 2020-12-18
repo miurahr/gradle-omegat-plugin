@@ -1,8 +1,5 @@
 plugins {
     id "groovy"
-    id "com.jfrog.bintray" version "1.8.5"
-    id "maven"
-    id "maven-publish"
     id "signing"
     id 'groovy-gradle-plugin'
     id "com.gradle.plugin-publish" version "0.12.0"
@@ -18,7 +15,6 @@ file("$rootDir/src/main/resources/org/omegat/gradle/omegat.properties").withRead
     project.ext.omegatDependency = props.getProperty("dependency")
     project.ext.omegatRepositoryUrl = props.getProperty("mavenRepositoryUrl")
 }
-
 
 gradlePlugin {
     plugins {
@@ -75,71 +71,10 @@ artifacts {
 }
 
 // The Gradle plugin portal doesn't allow signature files.
-// bintray is configured to do automate signing
-if (!gradle.startParameter.taskNames.intersect(['publishPlugins', 'bintray'])) {
+if (!gradle.startParameter.taskNames.intersect(['publishPlugins'])) {
     signing {
         useGpgCmd()
         required { isReleaseVersion }
         sign configurations.archives
     }
-}
-
-install {
-    repositories.mavenInstaller {
-        pom.project {
-            name = project.name
-            packaging = 'jar'
-            description = projectDesc
-            url = projectUrl
-            version = project.version
-            licenses {
-                license {
-                    name = 'GNU General Public License, Version 3'
-                    url = 'https://www.gnu.org/licenses/gpl.html'
-                    distribution = 'repo'
-                }
-            }
-            scm {
-                url = githubUrl
-                connection = "scm:git:${githubUrl}"
-                developerConnection = "scm:git:${githubUrl}"
-            }
-            developers {
-                developer {
-                    id = 'miurahr'
-                    name = 'Hiroshi Miura'
-                    email = 'miurahr@linux.com'
-                }
-            }
-        }
-    }
-}
-
-bintray {
-    user = project.hasProperty('bintrayUser') ? project.property('bintrayUser') : System.getenv('BINTRAY_USER')
-    key = project.hasProperty('bintrayApiKey') ? project.property('bintrayApiKey') : System.getenv('BINTRAY_API_KEY')
-    dryRun = false
-    configurations = ['archives']
-    pkg {
-        repo = 'maven'
-        name = 'gradle-omegat-plugin'
-        desc = projectDesc
-        websiteUrl = projectUrl
-        issueTrackerUrl = projectUrl + '/issues'
-        vcsUrl = projectUrl
-        githubRepo = githubUser + '/' + githubRepository
-        licenses = ['GPL-3.0']
-        labels = ['java', 'OmegaT', 'translation', 'Translation Memory', 'CAT', 'Gradle', 'Bundle', 'resources', 'localize']
-        publicDownloadNumbers = true
-        version {
-            name = project.version
-            vcsTag = "v${project.version}"
-            attributes = ["gradle-plugin": "org.omegat.gradle"]
-        }
-    }
-}
-
-// see https://github.com/bintray/gradle-bintray-plugin/issues/300
-Signature.metaClass.getToSignArtifact = { ->
-    return (delegate as Signature).source
 }
