@@ -12,6 +12,7 @@ All notable changes to this project will be documented in this file.
 - Drop signing when publish(signed on cloud)
 - Bump up OmegaT 5.4.1
 - Bump up Gradle 6.7.1
+- CI: Github actions
 
 ## [0.9.5] - 2017-4-29
 ## [0.9.4] - 2017-2-22
