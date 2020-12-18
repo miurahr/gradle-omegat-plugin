@@ -6,7 +6,7 @@ import org.gradle.api.tasks.TaskAction
 import org.gradle.process.JavaExecSpec
 
 /**
- * Created by miurahr on 16/08/01.
+ * Created by Hiroshi Miura on 08/01/2016.
  */
 class OmegatTask extends DefaultTask {
     @Input String[] options

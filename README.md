@@ -25,10 +25,10 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'org.omegat.gradle:gradle-omegat-plugin:0.9.4'
+        classpath 'org.omegat.gradle:gradle-omegat-plugin:0.9.6'
     }
 }
-apply plugin: 'com.omegat.gradle'
+apply plugin: 'gradle-omegat-plugin'
 ```
 Note:
 As in 20, Auguest, 2016, the plugin is located my bintray repository and not in jcenter nor

@@ -7,6 +7,7 @@ import org.gradle.api.artifacts.Configuration
 import org.gradle.api.artifacts.repositories.MavenArtifactRepository
 import org.gradle.api.tasks.Delete
 
+
 class OmegatPlugin implements Plugin<Project> {
     static final String OMEGAT_CONFIGURATION_NAME = "omegatPlugin"
     static final String TASK_BUILD_NAME = "translate"
