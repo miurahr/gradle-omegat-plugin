@@ -133,7 +133,7 @@ bintray {
         publicDownloadNumbers = true
         version {
             name = project.version
-            csTag = "v${project.version}"
+            vcsTag = "v${project.version}"
             attributes = ["gradle-plugin": "org.omegat.gradle"]
         }
     }
