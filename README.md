@@ -1,7 +1,5 @@
 # Overview
 
-[![Join the chat at https://gitter.im/miurahr/gradle-omegat-plugin](https://badges.gitter.im/miurahr/gradle-omegat-plugin.svg)](https://gitter.im/miurahr/gradle-omegat-plugin?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 The OmegaT gradle plugin allow you to generate translation files from original source text
 with TMX translation memory DB.
 
@@ -47,7 +45,7 @@ If not specified, the OmegaT plugin assumes project directory `$projectDir` is a
 ### Step 3: Add your own custom OmegaT task
 
 You can make your own custom task using `OmegatTask` type.
-Here is an example to run Java properties alignment from gradle task.
+Here is an example to run Java properties' alignment from gradle task.
 
 ```groovy
 repositories {
@@ -65,9 +63,6 @@ task runOmegaT(type: OmegatTask) {
     options = [projectDir]
 }
 
-task alignProperties(type: OmegatTask) {
-    options = [projectDir, "--mode=console-align", "--alignDir=/translatedFiles/"]
-}
 ```
 
 ### Step 4: Call translation
@@ -89,7 +84,7 @@ $ ./gradlew cleanTranslation
 
 ## Send patch
 
-It is recommend to send a pull request to github project as usual.
+It is recommended to send a pull request to github project as usual.
 
 ## Discussion
 
@@ -115,11 +110,11 @@ plugin source.
 
 Run
 ```
-$ ./gradlew uploadArchives
+$ ./gradlew publishToMavenLocal
 ```
-then gradle installes artifact into your local maven repository.
+then gradle installs an artifact into your local maven repository.
 This effects your development environment to support new test version
-is accesible from your test project.
+is accessible from your test project.
 
 ### Upload artifact
 
