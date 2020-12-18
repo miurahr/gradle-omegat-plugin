@@ -5,7 +5,7 @@ plugins {
     id "com.gradle.plugin-publish" version "0.12.0"
 }
 
-group = 'org.omegat.gradle'
+group = 'org.omegat'
 version = currentVersion
 ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
 
@@ -19,7 +19,7 @@ file("$rootDir/src/main/resources/org/omegat/gradle/omegat.properties").withRead
 gradlePlugin {
     plugins {
         omegatPlugin {
-            id = 'gradle-omegat-plugin'
+            id = 'org.omegat.gradle'
             implementationClass = 'org.omegat.gradle.OmegatPlugin'
         }
     }
@@ -28,7 +28,7 @@ gradlePlugin {
 pluginBundle {
     vcsUrl = 'https://github.com/omegat-org/gralde-omegat-plugin'
     website = 'https://github.com/omegat-org/gradle-omegat-plugin'
-    description = 'A plugin to support OmegaT on your project'
+    description = 'Integration with OmegaT translation jobs'
     tags = ['OmegaT']
     plugins {
         omegatPlugin {
@@ -48,26 +48,6 @@ dependencies {
     compileOnly gradleApi()
     compileOnly localGroovy()
     runtime omegatDependency
-}
-
-tasks.withType(GroovyCompile) {
-    groovyOptions.forkOptions.memoryMaximumSize = '256m'
-}
-
-task sourceJar(type: Jar) {
-    from sourceSets.main.allSource
-}
-
-task createReleasePropertiesFile(type:Exec) {
-    String fileName = 'omegat.plugin.release.properties'
-    println "Creating $fileName"
-    String fileContent = "version=$currentVersion"
-    (new File("$rootDir/$fileName")).write(fileContent)
-}
-
-artifacts {
-    archives jar
-    archives sourceJar
 }
 
 // The Gradle plugin portal doesn't allow signature files.

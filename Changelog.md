@@ -7,7 +7,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 - Reboot the project.
-- Change plugin name 'gradle-omegat-plugin'
+- Change plugin name 'org.omegat.gradle'
 - Use Gradle-publish plugin
 - Drop signing when publish
 - Bump up OmegaT 5.4.1
