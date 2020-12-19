@@ -13,7 +13,6 @@ ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
 file("$rootDir/src/main/resources/org/omegat/gradle/omegat.properties").withReader {
     Properties props = new Properties()
     props.load(it)
-    project.ext.omegatDependency = props.getProperty("dependency")
     project.ext.omegatRepositoryUrl = props.getProperty("mavenRepositoryUrl")
 }
 
@@ -27,9 +26,9 @@ gradlePlugin {
 }
 
 pluginBundle {
-    vcsUrl = 'https://github.com/omegat-org/gralde-omegat-plugin'
-    website = 'https://github.com/omegat-org/gradle-omegat-plugin'
-    description = 'Integration with OmegaT translation jobs'
+    vcsUrl = githubUrl
+    website = projectUrl
+    description = projectDesc
     tags = ['OmegaT']
     plugins {
         omegatPlugin {
@@ -39,16 +38,12 @@ pluginBundle {
 }
 
 repositories {
-    maven {
-        url omegatRepositoryUrl
-    }
     jcenter()
 }
 
 dependencies {
     compileOnly gradleApi()
     compileOnly localGroovy()
-    runtime omegatDependency
 }
 
 // The Gradle plugin portal doesn't allow signature files.

@@ -35,45 +35,57 @@ class OmegatPlugin implements Plugin<Project> {
         return targetDir
     }
 
+    private isProjectTranslation() {
+        def omtProject = new File(getRootDirectory(), 'omegat.project')
+        return omtProject.exists()
+    }
 
     @Override
     void apply(Project project) {
         this.project = project
 
-        project.extensions.create("omegat", OmegatPluginExtension)
+        def extension = project.extensions.create("omegat", OmegatPluginExtension)
 
         Configuration config = project.configurations.create(OMEGAT_CONFIGURATION_NAME)
                 .setVisible(false).setTransitive(true)
                 .setDescription('The OmegaT configuration for this project.')
 
         project.with {
-            tasks.create(name: TASK_BUILD_NAME, type: OmegatTask) {
-                description = "Generate translations into OmegaT target directory."
-                options = [getRootDirectory(), "--mode=console-translate"]
-            }
+            if (isProjectTranslation()) {
+                tasks.create(name: TASK_BUILD_NAME, type: OmegatTask) {
+                    description = "Generate translations into OmegaT target directory."
+                    options = [getRootDirectory(), "--mode=console-translate"]
+                }
 
-            tasks.create(name: TASK_CLEAN_NAME, type: Delete) {
-                description = 'Clean OmegaT target directory.'
-                new File(getRootDirectory(), getTargetDirectory()).listFiles()
-                        .findAll { it.isDirectory() || !(it.name.startsWith('.')) }.each {
-                    delete it
+                tasks.create(name: TASK_CLEAN_NAME, type: Delete) {
+                    description = 'Clean OmegaT target directory.'
+                    new File(getRootDirectory(), getTargetDirectory()).listFiles()
+                            .findAll { it.isDirectory() || !(it.name.startsWith('.')) }.each {
+                        delete it
+                    }
                 }
             }
 
             afterEvaluate {
                 Properties props = new Properties()
                 props.load(OmegatPlugin.class.getResourceAsStream("omegat.properties"))
-                if (project.repositories.isEmpty()) {
-                    project.repositories.jcenter()
-                    project.repositories.maven(new Action<MavenArtifactRepository>() {
-                        @Override
-                        void execute(MavenArtifactRepository mavenArtifactRepository) {
-                            mavenArtifactRepository.setUrl(props.getProperty("mavenRepositoryUrl"))
-                        }
-                    })
+                project.repositories.jcenter()
+                project.repositories.maven(new Action<MavenArtifactRepository>() {
+                    @Override
+                    void execute(MavenArtifactRepository mavenArtifactRepository) {
+                        mavenArtifactRepository.setUrl(props.getProperty("mavenRepositoryUrl"))
+                    }
+                })
+                def group = props.getProperty("omegatGroup")
+                def artifact = props.getProperty("omegatArtifact")
+                def version = extension.version ?: props.getProperty("omegatVersion")
+                def dep = "${group}:${artifact}:${version}"
+                if (isProjectTranslation()) {
+                    project.dependencies.add(OMEGAT_CONFIGURATION_NAME, dep)
+                } else {
+                    project.dependencies.add('compileOnly', dep)
+                    project.dependencies.add('testImplementation', dep)
                 }
-                project.dependencies.add(OMEGAT_CONFIGURATION_NAME,
-                        props.getProperty("dependency"))
             }
         }
     }
