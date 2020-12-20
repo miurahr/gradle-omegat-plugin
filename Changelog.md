@@ -3,11 +3,11 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
-## [1.1.0] - 2020-12-xx
-
 ### Added
+- Support OmegaT plugin development
 - make OmegaT version configurable
 - Add dependency as compileOnly and testImplementation
+- Drop signatory
 
 ## [1.0.0] - 2020-12-18
 

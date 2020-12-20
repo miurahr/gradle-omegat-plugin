@@ -1,6 +1,5 @@
 plugins {
     id "groovy"
-    id "signing"
     id 'groovy-gradle-plugin'
     id "com.gradle.plugin-publish" version "0.12.0"
     id 'maven-publish'
@@ -8,7 +7,6 @@ plugins {
 
 group = 'org.omegat'
 version = currentVersion
-ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
 
 file("$rootDir/src/main/resources/org/omegat/gradle/omegat.properties").withReader {
     Properties props = new Properties()
@@ -37,20 +35,7 @@ pluginBundle {
     }
 }
 
-repositories {
-    jcenter()
-}
-
 dependencies {
     compileOnly gradleApi()
     compileOnly localGroovy()
-}
-
-// The Gradle plugin portal doesn't allow signature files.
-if (!gradle.startParameter.taskNames.intersect(['publishPlugins'])) {
-    signing {
-        useGpgCmd()
-        required { isReleaseVersion }
-        sign configurations.archives
-    }
 }
