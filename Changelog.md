@@ -15,6 +15,7 @@ All notable changes to this project will be documented in this file.
 
 ## Fixed
 - Fix publish automation
+- Fix vcsUrl for publish
 
 ## [1.0.0] - 2020-12-18
 
