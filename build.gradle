@@ -8,13 +8,6 @@ plugins {
 group = 'org.omegat'
 version = currentVersion
 
-ext {
-    if (!project.hasProperty('gradle.publish.key')) {
-        gradle.publish.key = System.getenv('GRADLE_PUBLISH_KEY')
-        gradle.publish.secret = System.getenv('GRADLE_PUBLISH_SECRET')
-    }
-}
-
 gradlePlugin {
     plugins {
         omegatPlugin {
