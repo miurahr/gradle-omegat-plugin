@@ -8,10 +8,11 @@ plugins {
 group = 'org.omegat'
 version = currentVersion
 
-file("$rootDir/src/main/resources/org/omegat/gradle/omegat.properties").withReader {
-    Properties props = new Properties()
-    props.load(it)
-    project.ext.omegatRepositoryUrl = props.getProperty("mavenRepositoryUrl")
+ext {
+    if (!project.hasProperty('gradle.publish.key')) {
+        gradle.publish.key = System.getenv('GRADLE_PUBLISH_KEY')
+        gradle.publish.secret = System.getenv('GRADLE_PUBLISH_SECRET')
+    }
 }
 
 gradlePlugin {
@@ -21,11 +22,6 @@ gradlePlugin {
             implementationClass = 'org.omegat.gradle.OmegatPlugin'
         }
     }
-}
-
-if (!project.hasProperty('gradle.publish.key')) {
-    gradle.publish.key = System.getenv('GRADLE_PUBLISH_KEY')
-    gradle.publish.secret = System.getenv('GRADLE_PUBLISH_SECRET')
 }
 
 pluginBundle {
