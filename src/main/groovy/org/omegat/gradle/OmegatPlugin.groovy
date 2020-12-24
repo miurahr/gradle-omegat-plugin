@@ -6,10 +6,11 @@ import org.gradle.api.Plugin
 import org.gradle.api.artifacts.Configuration
 import org.gradle.api.artifacts.repositories.MavenArtifactRepository
 import org.gradle.api.tasks.Delete
+import org.gradle.jvm.tasks.Jar
 
 
 class OmegatPlugin implements Plugin<Project> {
-    static final String OMEGAT_CONFIGURATION_NAME = "omegatPlugin"
+    static final String CONFIGURATION_NAME = "packIntoJar"
     static final String TASK_BUILD_NAME = "translate"
     static final String TASK_CLEAN_NAME = 'cleanTranslation'
     private Project project
@@ -43,12 +44,18 @@ class OmegatPlugin implements Plugin<Project> {
     @Override
     void apply(Project project) {
         this.project = project
-
         def extension = project.extensions.create("omegat", OmegatPluginExtension)
-
-        Configuration config = project.configurations.create(OMEGAT_CONFIGURATION_NAME)
+        def jarTask = project.tasks.withType(Jar.class).getByName("jar")
+        jarTask.outputs.upToDateWhen { false }
+        Configuration config = project.configurations.create(CONFIGURATION_NAME)
                 .setVisible(false).setTransitive(true)
                 .setDescription('The OmegaT configuration for this project.')
+        if (project.findProperty("plugin.class") != null) {
+            jarTask.doFirst { task ->
+                {
+                    jarTask.manifest.attributes(["OmegaT-Plugins": project.findProperty("plugin.class")])
+                }}
+        }
 
         project.with {
             if (isProjectTranslation()) {
