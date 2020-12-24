@@ -50,11 +50,12 @@ class OmegatPlugin implements Plugin<Project> {
         Configuration config = project.configurations.create(CONFIGURATION_NAME)
                 .setVisible(false).setTransitive(true)
                 .setDescription('The OmegaT configuration for this project.')
-        if (project.findProperty("plugin.class") != null) {
-            jarTask.doFirst { task ->
-                {
-                    jarTask.manifest.attributes(["OmegaT-Plugins": project.findProperty("plugin.class")])
-                }}
+        if (isProjectTranslation()) {
+            if (project.extensions.omegat.pluginClass != null) {
+                jarTask.doFirst { task ->
+                    jarTask.manifest.attributes(["OmegaT-Plugins": project.extensions.omegat.pluginClass])
+                }
+            }
         }
 
         project.with {
