@@ -3,6 +3,9 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Added
+- Add manifest configuration
+
 ## [1.1.1] - 2020-12-23
 
 ### Added
