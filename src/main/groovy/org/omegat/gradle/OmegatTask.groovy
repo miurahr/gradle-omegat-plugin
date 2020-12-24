@@ -11,11 +11,14 @@ import org.gradle.process.JavaExecSpec
 class OmegatTask extends DefaultTask {
     @Input String[] options
 
+    def main = "org.omegat.Main"
+    def heap = "2048M"
+
     @TaskAction
     void start() {
         project.javaexec({ JavaExecSpec javaExecSpec ->
-            javaExecSpec.setMain("org.omegat.Main").args(options)
-            javaExecSpec.setMaxHeapSize("2048M")
+            javaExecSpec.setMain(main).args(options)
+            javaExecSpec.setMaxHeapSize(heap)
             javaExecSpec.setClasspath(project.configurations.getByName(OmegatPlugin.OMEGAT_CONFIGURATION_NAME))
         });
     }
