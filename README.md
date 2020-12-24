@@ -3,23 +3,21 @@
 The OmegaT gradle plugin allow you to generate translation files from original source text
 with TMX translation memory DB.
 
-# Getting Started Using the Plugin
+# Getting Started Using the Plugin to generate translation from OmegaT team project
 
 Please follow the below steps to add the Gradle OmegaT Plugin to your Gradle build script.
 
-#### Step 1: Apply the plugin to your Gradle script
+### Step 1: Apply the plugin to your Gradle script
 
 To apply the plugin, please add one of the following snippets to your `build.gradle` file:
 
 ```groovy
 plugins {
-    id 'org.omegat.gradle' version '1.0.0'
+    id 'org.omegat.gradle' version '1.1.1'
 }
 ```
 
-- As of 19, Dec. 2020, the project waits an approval by gradle portal. 
-
-#### Step 2: (optional) `omegat` configuration closure to your `build.gradle` file
+### Step 2: (optional) `omegat` configuration closure to your `build.gradle` file
 
 ```groovy
 omegat {
@@ -56,4 +54,39 @@ This will generate translation result in OmegaT target directory.
 
 ```bash
 $ ./gradlew cleanTranslation
+```
+
+# Getting started with the plugin to develop a custom OmegaT plugin
+
+### Step 1: Apply the plugin to your Gradle script
+
+To apply the plugin, please add one of the following snippets to your `build.gradle` file:
+
+```groovy
+plugins {
+    id 'org.omegat.gradle' version '1.1.1'
+}
+```
+
+### Step 2: `omegat` configuration closure to your `build.gradle` file
+
+```groovy
+omegat {
+    version '5.2.0'
+}
+```
+The plugin automatically configure gradle project to depend on specified version of OmegaT and
+it is set as dependency but not included into plugin jar file.
+
+### Step 3. Configure Fat-Jar and set manifest
+
+```groovy
+jar {
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    manifest {
+        attributes("OmegaT-Plugins": "your.plugin.main.className")
+    }
+}
 ```
