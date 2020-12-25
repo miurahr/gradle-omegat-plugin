@@ -10,7 +10,8 @@ import org.gradle.jvm.tasks.Jar
 
 
 class OmegatPlugin implements Plugin<Project> {
-    static final String CONFIGURATION_NAME = "packIntoJar"
+    static final String CONFIGURATION_NAME = "omegat"
+    static final String FATJAR_CONF_NAME = "packIntoJar"
     static final String TASK_BUILD_NAME = "translate"
     static final String TASK_CLEAN_NAME = 'cleanTranslation'
     private Project project
@@ -36,6 +37,10 @@ class OmegatPlugin implements Plugin<Project> {
         return targetDir
     }
 
+    private isProjectPlugin() {
+        return !isProjectTranslation()
+    }
+
     private isProjectTranslation() {
         def omtProject = new File(getRootDirectory(), 'omegat.project')
         return omtProject.exists()
@@ -45,16 +50,22 @@ class OmegatPlugin implements Plugin<Project> {
     void apply(Project project) {
         this.project = project
         def extension = project.extensions.create("omegat", OmegatPluginExtension)
-        def jarTask = project.tasks.withType(Jar.class).getByName("jar")
-        jarTask.outputs.upToDateWhen { false }
-        Configuration config = project.configurations.create(CONFIGURATION_NAME)
-                .setVisible(false).setTransitive(true)
-                .setDescription('The OmegaT configuration for this project.')
-        if (isProjectTranslation()) {
-            if (project.extensions.omegat.pluginClass != null) {
-                jarTask.doFirst { task ->
-                    jarTask.manifest.attributes(["OmegaT-Plugins": project.extensions.omegat.pluginClass])
-                }
+        def config = project.configurations.create(CONFIGURATION_NAME)
+        config.setVisible(false).setTransitive(true).setDescription('The OmegaT configuration for this project.')
+        if (isProjectPlugin()) {
+            def mainConfiguration = project.configurations.getByName("implementation")
+            Configuration omtPluginConfig = project.configurations.create(FATJAR_CONF_NAME)
+            omtPluginConfig.setVisible(true).setTransitive(true).setDescription('The OmegaT Plugin configuration for FatJar generation')
+            mainConfiguration.extendsFrom(omtPluginConfig)
+            def jarTask = project.tasks.withType(Jar.class).getByName("jar")
+            jarTask.outputs.upToDateWhen { false }
+            jarTask.doFirst { task ->
+                jarTask.manifest.attributes([ "OmegaT-Plugins" : project.extensions.omegat.pluginClass])
+                jarTask.from(
+                    task.project.configurations.getByName(FATJAR_CONF_NAME).files.collect({file ->
+                        file.isDirectory() ? project.fileTree(file) : project.zipTree(file)
+                    })
+                )
             }
         }
 
@@ -89,9 +100,9 @@ class OmegatPlugin implements Plugin<Project> {
                 def version = extension.version ?: props.getProperty("omegatVersion")
                 def dep = "${group}:${artifact}:${version}"
                 if (isProjectTranslation()) {
-                    project.dependencies.add(OMEGAT_CONFIGURATION_NAME, dep)
+                    project.dependencies.add(CONFIGURATION_NAME, dep)
                 } else {
-                    project.dependencies.add('compileOnly', dep)
+                    project.dependencies.add('implementation', dep)
                     project.dependencies.add('testImplementation', dep)
                 }
             }
