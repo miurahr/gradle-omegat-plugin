@@ -13,11 +13,13 @@ To apply the plugin, please add one of the following snippets to your `build.gra
 
 ```groovy
 plugins {
-    id 'org.omegat.gradle' version '1.1.1'
+    id 'org.omegat.gradle' version '1.2.0' // available: 1.1.1, 1.2.0
 }
 ```
 
 ### Step 2: (optional) `omegat` configuration closure to your `build.gradle` file
+
+With this configuration, you can put build.gradle file on other than project root.
 
 ```groovy
 omegat {
@@ -64,7 +66,7 @@ To apply the plugin, please add one of the following snippets to your `build.gra
 
 ```groovy
 plugins {
-    id 'org.omegat.gradle' version '1.1.1'
+    id 'org.omegat.gradle' version '1.2.0'
 }
 ```
 
@@ -72,21 +74,26 @@ plugins {
 
 ```groovy
 omegat {
-    version '5.2.0'
+    version '5.2.0' // available: 5.2.0, 5.4.1
+    pluginClass "your.plugin.main.className" // mandatory for plugin development
+
 }
 ```
 The plugin automatically configure gradle project to depend on specified version of OmegaT and
 it is set as dependency but not included into plugin jar file.
 
-### Step 3. Configure Fat-Jar and set manifest
+### Step 3. Configure dependencies
+
+You can put dependencies with packIntoJar configuration, dependencies are bundled with plugin as Fat-Jar.
+Libraries other than packIntoJar such as implementation, compile etc. are used to compile but not bundled.
+A following example illustrate how to use, and slf4j-api is going to be bundled, and commons-io library is not.
+It is because commons-io is dependency of OmegaT, so we can use it without bundled.
 
 ```groovy
-jar {
-    from {
-        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
-    }
-    manifest {
-        attributes("OmegaT-Plugins": "your.plugin.main.className")
-    }
+dependencies {
+    packIntoJar 'org.slf4j:slf4j-api:1.7.25'
+    compile 'commons-io:commons-io:2.5'
+    compile 'commons-lang:commons-lang:2.6'
+    // ...
 }
 ```
