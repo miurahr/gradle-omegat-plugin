@@ -4,6 +4,7 @@ import org.gradle.api.Action
 import org.gradle.api.Project
 import org.gradle.api.Plugin
 import org.gradle.api.artifacts.Configuration
+import org.gradle.api.artifacts.Dependency
 import org.gradle.api.artifacts.repositories.MavenArtifactRepository
 import org.gradle.api.tasks.Delete
 import org.gradle.jvm.tasks.Jar
@@ -102,8 +103,10 @@ class OmegatPlugin implements Plugin<Project> {
                 if (isProjectTranslation()) {
                     project.dependencies.add(CONFIGURATION_NAME, dep)
                 } else {
-                    project.dependencies.add('implementation', dep)
-                    project.dependencies.add('testImplementation', dep)
+                    Configuration implementation = project.configurations.implementation
+                    implementation.dependencies.add(project.dependencies.create(dep))
+                    Configuration testImplementation = project.configurations.testImplementation
+                    testImplementation.dependencies.add(project.dependencies.create(dep))
                 }
             }
         }
