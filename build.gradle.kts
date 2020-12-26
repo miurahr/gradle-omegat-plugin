@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm") version "1.4.21"
+    kotlin("jvm") version "1.3.72"
     groovy
     `groovy-gradle-plugin`
     id("com.gradle.plugin-publish") version "0.12.0"
@@ -35,6 +35,7 @@ gradlePlugin {
         implementationClass = "org.omegat.gradle.OmegatPlugin"
     }
 }
+
 publishing {
   publications.withType(MavenPublication::class).all {
     if (name == "pluginMaven") {
