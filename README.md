@@ -3,7 +3,16 @@
 The OmegaT gradle plugin allow you to generate translation files from original source text
 with TMX translation memory DB.
 
-# Getting Started Using the Plugin to generate translation from OmegaT team project
+# Getting Started 
+
+There is two types of tasks of the plugin.
+
+1. Tasks on translation project
+
+2. Tasks for OmegaT plugin development project
+
+
+## Generate translation on OmegaT team project
 
 Please follow the below steps to add the Gradle OmegaT Plugin to your Gradle build script.
 
@@ -29,7 +38,7 @@ omegat {
 
 If not specified, the OmegaT plugin assumes project directory `$projectDir` is an omegat project root.
 
-### (optional) your custom OmegaT task
+### Step 3: (optional) your custom OmegaT task
 
 You can make your own custom task using `OmegatTask` type.
 Here is an example to run Java properties' alignment from gradle task.
@@ -58,7 +67,7 @@ This will generate translation result in OmegaT target directory.
 $ ./gradlew cleanTranslation
 ```
 
-# Getting started with the plugin to develop a custom OmegaT plugin
+## Development of a custom OmegaT plugin
 
 ### Step 1: Apply the plugin to your Gradle script
 
