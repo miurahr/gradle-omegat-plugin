@@ -3,12 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
-## [1.2.1] - 2020-12-25
+## [1.2.2] - 2020-12-26
 
 ### Fixed
-- Fix configuration 'implementation' not found error.
-
-## [1.2.0] - 2020-12-25
+- Fix plugin load error
 
 ### Added
 - Add manifest configuration

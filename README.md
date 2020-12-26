@@ -13,7 +13,7 @@ To apply the plugin, please add one of the following snippets to your `build.gra
 
 ```groovy
 plugins {
-    id 'org.omegat.gradle' version '1.2.0' // available: 1.1.1, 1.2.0
+    id 'org.omegat.gradle' version '1.2.2'
 }
 ```
 
@@ -66,7 +66,7 @@ To apply the plugin, please add one of the following snippets to your `build.gra
 
 ```groovy
 plugins {
-    id 'org.omegat.gradle' version '1.2.0'
+    id 'org.omegat.gradle' version '1.2.2'
 }
 ```
 
