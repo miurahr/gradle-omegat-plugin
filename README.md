@@ -13,7 +13,7 @@ To apply the plugin, please add one of the following snippets to your `build.gra
 
 ```groovy
 plugins {
-    id 'org.omegat.gradle' version '1.2.2'
+    id 'org.omegat.gradle' version '1.2.3'
 }
 ```
 
@@ -23,25 +23,12 @@ With this configuration, you can put build.gradle file on other than project roo
 
 ```groovy
 omegat {
-    projectDir project.rootDir
+    projectDir "path/to/omegat/team/project"
 }
 ```
 
 If not specified, the OmegaT plugin assumes project directory `$projectDir` is an omegat project root.
 
-### (optional) your custom OmegaT task
-
-You can make your own custom task using `OmegatTask` type.
-Here is an example to run Java properties' alignment from gradle task.
-
-```groovy
-import org.omegat.gradle.OmegatTask
-
-task runOmegaT(type: OmegatTask) {
-    options = [projectDir]
-}
-
-```
 
 ###  Call translation
 
@@ -51,13 +38,6 @@ $ ./gradlew translate
 
 This will generate translation result in OmegaT target directory.
 
-
-###  Clean targets
-
-```bash
-$ ./gradlew cleanTranslation
-```
-
 # Getting started with the plugin to develop a custom OmegaT plugin
 
 ### Step 1: Apply the plugin to your Gradle script
@@ -66,7 +46,7 @@ To apply the plugin, please add one of the following snippets to your `build.gra
 
 ```groovy
 plugins {
-    id 'org.omegat.gradle' version '1.2.2'
+    id 'org.omegat.gradle' version '1.2.3'
 }
 ```
 
@@ -79,6 +59,7 @@ omegat {
 
 }
 ```
+
 The plugin automatically configure gradle project to depend on specified version of OmegaT and
 it is set as dependency but not included into plugin jar file.
 
