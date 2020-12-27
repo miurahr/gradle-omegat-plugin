@@ -1,8 +1,10 @@
 package org.omegat.gradle
 
+import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.TaskAction
 
 open class OmegatTranslateTask : OmegatTask() {
+    @Input
     var rootDir: String = "."
 
     @TaskAction
