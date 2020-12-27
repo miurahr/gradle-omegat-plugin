@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.2.3] - 2020-12-27
+
+### Changed
+- Use Kotlin for build script
+
 ## [1.2.2] - 2020-12-26
 
 ### Fixed
