@@ -5,7 +5,7 @@ with TMX translation memory DB.
 
 # Getting Started 
 
-There is two types of tasks of the plugin.
+There are two types of tasks of the plugin.
 
 1. Tasks on translation project
 
@@ -69,8 +69,8 @@ omegat {
 }
 ```
 
-The plugin automatically configure gradle project to depend on specified version of OmegaT and
-it is set as dependency but not included into plugin jar file.
+The plugin automatically configure gradle project to depend on specified version of OmegaT.
+It is set as dependency for build, but not included into the plugin jar file.
 
 ### Step 3. Configure dependencies
 
