@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.2.4] - 2020-12-29
+
+### Fixed
+- CI: build with Java8
+
 ## [1.2.3] - 2020-12-27
 
 ### Changed
@@ -46,8 +51,10 @@ All notable changes to this project will be documented in this file.
 ## [0.9.4] - 2017-2-22
 ## [0.9.1] - 2016-9-25
 
-[Unreleased]: https://github.com/miurahr/omegat-textra-plugin/compare/v1.2.0...HEAD
-[1.2.0]: https://github.com/miurahr/omegat-textra-plugin/compare/v1.1.1...v1.2.0
+[Unreleased]: https://github.com/miurahr/omegat-textra-plugin/compare/v1.2.4...HEAD
+[1.2.4]: https://github.com/miurahr/omegat-textra-plugin/compare/v1.2.3...v1.2.4
+[1.2.3]: https://github.com/miurahr/omegat-textra-plugin/compare/v1.2.2...v1.2.3
+[1.2.2]: https://github.com/miurahr/omegat-textra-plugin/compare/v1.1.1...v1.2.2
 [1.1.1]: https://github.com/miurahr/omegat-textra-plugin/compare/v1.0.0...v1.1.1
 [1.0.0]: https://github.com/miurahr/omegat-textra-plugin/compare/v0.9.5...v1.0.0
 [0.9.5]: https://github.com/miurahr/omegat-textra-plugin/compare/v0.9.4...v0.9.5
