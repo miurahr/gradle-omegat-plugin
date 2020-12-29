@@ -84,11 +84,12 @@ class OmegatPlugin implements Plugin<Project> {
                         mavenArtifactRepository.setUrl(props.getProperty("mavenRepositoryUrl"))
                     }
                 })
-                def group = props.getProperty("omegatGroup")
-                def artifact = props.getProperty("omegatArtifact")
-                def version = extension.version ?: props.getProperty("omegatVersion")
-                def dep = "${group}:${artifact}:${version}"
-                project.dependencies.add(CONFIGURATION_NAME, dep)
+                def omegatVersion = extension.version ?: props.getProperty("omegatVersion")
+                def vldockingVersion = props.getProperty("vldockingVersion")
+                def deps = ["org.omegat:omegat:${omegatVersion}", "org.omegat:vldocking:3.0.5"]
+                for (String dep: deps) {
+                    project.dependencies.add(CONFIGURATION_NAME, dep)
+                }
                 if (isProjectPlugin()) {
                     def jarTask = project.tasks.withType(Jar.class).getByName("jar")
                     jarTask.outputs.upToDateWhen { false }
@@ -103,9 +104,11 @@ class OmegatPlugin implements Plugin<Project> {
                     def implementation = project.configurations.implementation
                     def omtPluginConfig = project.configurations.getByName(FATJAR_CONF_NAME)
                     implementation.extendsFrom(omtPluginConfig)
-                    implementation.dependencies.add(project.dependencies.create(dep))
                     Configuration testImplementation = project.configurations.testImplementation
-                    testImplementation.dependencies.add(project.dependencies.create(dep))
+                    for (String dep: deps) {
+                        implementation.dependencies.add(project.dependencies.create(dep))
+                        testImplementation.dependencies.add(project.dependencies.create(dep))
+                    }
                 }
             }
         }
