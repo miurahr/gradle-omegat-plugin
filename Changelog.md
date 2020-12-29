@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.2.5] - 2020-12-29
+
+### Added
+- Add vldocking as dependency
+
 ## [1.2.4] - 2020-12-29
 
 ### Fixed
@@ -51,7 +56,8 @@ All notable changes to this project will be documented in this file.
 ## [0.9.4] - 2017-2-22
 ## [0.9.1] - 2016-9-25
 
-[Unreleased]: https://github.com/miurahr/omegat-textra-plugin/compare/v1.2.4...HEAD
+[Unreleased]: https://github.com/miurahr/omegat-textra-plugin/compare/v1.2.5...HEAD
+[1.2.5]: https://github.com/miurahr/omegat-textra-plugin/compare/v1.2.4...v1.2.5
 [1.2.4]: https://github.com/miurahr/omegat-textra-plugin/compare/v1.2.3...v1.2.4
 [1.2.3]: https://github.com/miurahr/omegat-textra-plugin/compare/v1.2.2...v1.2.3
 [1.2.2]: https://github.com/miurahr/omegat-textra-plugin/compare/v1.1.1...v1.2.2
