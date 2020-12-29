@@ -22,13 +22,20 @@ To apply the plugin, please add one of the following snippets to your `build.gra
 
 ```groovy
 plugins {
-    id 'org.omegat.gradle' version '1.2.3'
+    id 'org.omegat.gradle' version '1.2.5'
+}
+```
+or `build.gradle.kts` file in Kotlin;
+
+```kotlin
+plugins {
+    id("org.omegat.gradle") version "1.2.5"
 }
 ```
 
 ### Step 2: (optional) `omegat` configuration closure to your `build.gradle` file
 
-With this configuration, you can put build.gradle file on other than project root.
+With this configuration, you can put build.gradle file on other than team project root where `omegat.project` file located.
 
 ```groovy
 omegat {
@@ -55,7 +62,7 @@ To apply the plugin, please add one of the following snippets to your `build.gra
 
 ```groovy
 plugins {
-    id 'org.omegat.gradle' version '1.2.3'
+    id 'org.omegat.gradle' version '1.2.5'
 }
 ```
 
