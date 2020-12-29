@@ -7,6 +7,10 @@ plugins {
 group = "org.omegat"
 version = "1.3.0-SNAPSHOT"
 
+tasks.compileJava {
+    options.release.set(8)
+}
+
 repositories {
     jcenter()
 }
