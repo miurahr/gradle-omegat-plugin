@@ -11,16 +11,14 @@ import java.io.File
 
 class OmegatPlugin: Plugin<Project> {
     override fun apply(project: Project) {
-        val extension = project.extensions.run {
-            create("omegat", OmegatPluginExtension::class.java, project)
-        }
+        val extension = project.extensions.create("omegat", OmegatPluginExtension::class.java, project)
         project.configurations.run {
             val config = create("packIntoJar")
             config.setVisible(false).setTransitive(true).setDescription("The OmegaT configuration for this project.")
             create("omegat")
         }
         with(project) {
-            project.setupOmegatTasks()
+            project.setupOmegatTasks(extension)
             afterEvaluate {
                 val defaultOmegatModule = DefaultOmegatModule(project)
                 val deps = defaultOmegatModule.getDependencies(extension.version)
