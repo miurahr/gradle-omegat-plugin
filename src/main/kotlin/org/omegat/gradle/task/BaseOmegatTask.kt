@@ -8,7 +8,7 @@ import org.gradle.api.tasks.TaskAction
 
 
 @CacheableTask
-open class OmegatTask : JavaExec() {
+open class BaseOmegatTask : JavaExec() {
     init {
         group = "org.omegat"
         main = "org.omegat.Main"
