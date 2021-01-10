@@ -27,13 +27,11 @@ open class BaseTask : JavaExec() {
         if (hasProperty("http.proxyHost")) {
             argList.add("-Dhttp.proxyHost=" + property("http.proxyHost"))
         }
-        argList.add("--disable-location-save")
         return argList
     }
 
     @TaskAction
     override fun exec() {
-        args = getArgList()
         maxHeapSize = "2048M"
         classpath = project.configurations.getByName("omegat")
         super.exec()
