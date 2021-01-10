@@ -5,9 +5,7 @@ import org.gradle.api.Project
 import org.gradle.jvm.tasks.Jar
 import org.omegat.gradle.config.DefaultOmegatModule
 import org.omegat.gradle.config.OmegatPluginExtension
-import org.omegat.gradle.task.DebugOmegatTask
-import org.omegat.gradle.task.RunOmegatTask
-import org.omegat.gradle.task.TranslateTask
+import org.omegat.gradle.task.setupOmegatTasks
 import java.io.File
 
 
@@ -20,18 +18,7 @@ class OmegatPlugin: Plugin<Project> {
             create("omegat")
         }
         with(project) {
-            tasks.register("translate", TranslateTask::class.java) { task ->
-                task.rootDir = project.rootDir.toString()
-            }
-            tasks.register("runOmegaT", RunOmegatTask::class.java) { task ->
-                task.rootDir = project.rootDir.toString()
-            }
-            if (extension.debugPort != null) {
-                tasks.register("debugOmegaT", DebugOmegatTask::class.java) { task ->
-                    task.rootDir = project.rootDir.toString()
-                    task.debugPort = extension.debugPort
-                }
-            }
+            project.setupOmegatTasks(extension)
             afterEvaluate {
                 val deps = DefaultOmegatModule(project).getDependencies(extension.version)
                 project.configurations.run {

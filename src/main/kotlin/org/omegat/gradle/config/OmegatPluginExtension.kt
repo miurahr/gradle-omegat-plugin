@@ -19,9 +19,6 @@ open class OmegatPluginExtension(val project: Project) {
     var pluginClass: String? = null
     var debugPort: Int? = null
 
-    var tmpOmegatPrefDir = File(project.buildDir, ".omegat/")
-    var pluginDir = File(tmpOmegatPrefDir, "plugins")
-
     val initialPreferences: Property<String> = project.objects.property(String::class.java).convention("")
 
     /**

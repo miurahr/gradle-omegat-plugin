@@ -5,6 +5,7 @@ import org.gradle.api.tasks.CacheableTask
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.JavaExec
 import org.gradle.api.tasks.TaskAction
+import java.io.File
 
 
 @CacheableTask
@@ -31,6 +32,7 @@ open class BaseOmegatTask : JavaExec() {
         if (hasProperty("http.proxyHost")) {
             argList.add("-Dhttp.proxyHost=" + property("http.proxyHost"))
         }
+        argList.add("--config-dir=${File(project.buildDir, "tmp/omegat/")}")
         return argList
     }
 
