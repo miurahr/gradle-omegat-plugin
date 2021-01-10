@@ -3,7 +3,7 @@ package org.omegat.gradle.task
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.TaskAction
 
-open class DebugOmegatTask : BaseOmegatTask() {
+open class DebugOmegatTask : RunOmegatTask() {
      @Input
      var debugPort: Int? = null
 

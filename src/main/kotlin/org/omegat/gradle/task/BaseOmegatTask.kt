@@ -29,7 +29,6 @@ open class BaseOmegatTask : JavaExec() {
         if (hasProperty("http.proxyHost")) {
             argList.add("-Dhttp.proxyHost=" + property("http.proxyHost"))
         }
-        argList.add("--config-dir=${File(project.buildDir, "tmp/omegat/")}")
         argList.add("--disable-location-save")
         return argList
     }

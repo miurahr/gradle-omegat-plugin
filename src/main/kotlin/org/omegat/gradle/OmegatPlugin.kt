@@ -2,6 +2,7 @@ package org.omegat.gradle
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.plugins.JavaPluginConvention
 import org.gradle.jvm.tasks.Jar
 import org.omegat.gradle.config.DefaultOmegatModule
 import org.omegat.gradle.config.OmegatPluginExtension
@@ -18,7 +19,8 @@ class OmegatPlugin: Plugin<Project> {
             create("omegat")
         }
         with(project) {
-            project.setupOmegatTasks(extension)
+            val javaConvention = project.convention.findPlugin(JavaPluginConvention::class.java)
+            project.setupOmegatTasks(extension, javaConvention)
             afterEvaluate {
                 val deps = DefaultOmegatModule(project).getDependencies(extension.version)
                 project.configurations.run {
