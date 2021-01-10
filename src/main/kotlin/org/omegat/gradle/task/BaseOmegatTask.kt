@@ -16,13 +16,10 @@ open class BaseOmegatTask : JavaExec() {
     }
 
     @Input
-    var rootDir: String = "."
+    var projectDir: String = project.rootDir.toString()
 
-    @Input
-    var properties: GradleProperties? = null
-
-    protected fun getProperties(): MutableList<String> {
-        var argList: MutableList<String> = mutableListOf(rootDir)
+    protected fun getArgList(): MutableList<String> {
+        val argList: MutableList<String> = mutableListOf(projectDir)
         if (hasProperty("user.language")) {
             argList.add("-Duser.language=" + property("user.language"))
             if (hasProperty("user.country")) {
@@ -33,12 +30,13 @@ open class BaseOmegatTask : JavaExec() {
             argList.add("-Dhttp.proxyHost=" + property("http.proxyHost"))
         }
         argList.add("--config-dir=${File(project.buildDir, "tmp/omegat/")}")
+        argList.add("--disable-location-save")
         return argList
     }
 
     @TaskAction
     override fun exec() {
-        args = getProperties()
+        args = getArgList()
         maxHeapSize = "2048M"
         classpath = project.configurations.getByName("omegat")
         super.exec()

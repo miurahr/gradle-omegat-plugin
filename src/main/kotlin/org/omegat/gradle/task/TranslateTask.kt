@@ -6,7 +6,7 @@ open class TranslateTask : BaseOmegatTask() {
 
     @TaskAction
     override fun exec() {
-        args = getProperties().apply {
+        args = getArgList().apply {
             add("--mode=console-translate")
         }
         super.exec()

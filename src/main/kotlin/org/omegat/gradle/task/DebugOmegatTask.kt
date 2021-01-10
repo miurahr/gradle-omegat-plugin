@@ -9,8 +9,7 @@ open class DebugOmegatTask : BaseOmegatTask() {
 
      @TaskAction
      override fun exec() {
-          var argList: MutableList<String> = getProperties()
-          args = argList
+          args = getArgList()
           jvmArgs("-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=$debugPort")
           super.exec()
      }
