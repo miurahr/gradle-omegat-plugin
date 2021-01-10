@@ -1,15 +1,13 @@
 package org.omegat.gradle.task
 
-import org.gradle.api.internal.properties.GradleProperties
 import org.gradle.api.tasks.CacheableTask
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.JavaExec
 import org.gradle.api.tasks.TaskAction
-import java.io.File
 
 
 @CacheableTask
-open class BaseOmegatTask : JavaExec() {
+open class BaseTask : JavaExec() {
     init {
         group = "org.omegat"
         main = "org.omegat.Main"

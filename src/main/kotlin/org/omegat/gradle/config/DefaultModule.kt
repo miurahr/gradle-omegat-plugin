@@ -4,7 +4,7 @@ import org.gradle.api.Project
 import org.omegat.gradle.OmegatPlugin
 import java.util.*
 
-class DefaultOmegatModule(val project: Project) {
+class DefaultModule(val project: Project) {
     private val props = Properties()
 
     init {

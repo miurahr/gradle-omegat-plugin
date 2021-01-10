@@ -6,7 +6,7 @@ import org.gradle.api.plugins.BasePluginConvention
 import org.gradle.api.tasks.util.PatternFilterable
 
 
-open class OmegatPluginExtension(val project: Project) {
+open class PluginExtension(val project: Project) {
     var pluginName: String
     get() = project.convention.getPlugin(BasePluginConvention::class.java).archivesBaseName
     set(value) {

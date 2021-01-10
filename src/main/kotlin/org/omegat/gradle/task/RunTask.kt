@@ -3,7 +3,7 @@ package org.omegat.gradle.task
 import org.gradle.api.tasks.TaskAction
 import java.io.File
 
-open class RunOmegatTask : BaseOmegatTask()  {
+open class RunTask : BaseTask()  {
     @TaskAction
     override fun exec() {
         args = getArgList().apply {
