@@ -16,6 +16,7 @@ open class BaseTask : JavaExec() {
     @Input
     var projectDir: String = project.rootDir.toString()
 
+    @Input
     protected fun getArgList(): MutableList<String> {
         val argList: MutableList<String> = mutableListOf(projectDir)
         if (hasProperty("user.language")) {

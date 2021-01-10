@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+
+## [1.3.1] - 2021-01-10
+
+### Fixed
+- Suppress annotation error
+
 ## [1.3.0] - 2021-01-10
 
 ### Changed
@@ -52,7 +58,8 @@ All notable changes to this project will be documented in this file.
 ## [0.9.4] - 2017-2-22
 ## [0.9.1] - 2016-9-25
 
-[Unreleased]: https://github.com/miurahr/omegat-textra-plugin/compare/v1.3.0...HEAD
+[Unreleased]: https://github.com/miurahr/omegat-textra-plugin/compare/v1.3.1...HEAD
+[1.3.1]: https://github.com/miurahr/omegat-textra-plugin/compare/v1.3.0...v1.3.1
 [1.3.0]: https://github.com/miurahr/omegat-textra-plugin/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/miurahr/omegat-textra-plugin/compare/v1.1.1...v1.2.0
 [1.1.1]: https://github.com/miurahr/omegat-textra-plugin/compare/v1.0.0...v1.1.1
