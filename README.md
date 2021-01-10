@@ -70,17 +70,18 @@ plugins {
 
 ```groovy
 omegat {
-    version '5.2.0' // available: 5.2.0, 5.4.1
+    version '5.2.0' // available: 5.2.0, 5.4.1: default
     pluginClass "your.plugin.main.className" // mandatory for plugin development
-    // debugPort = 5566
+    debugPort = 5566 // specify when you use a debugger
 }
 ```
 
 The plugin automatically configure gradle project to depend on specified version of OmegaT.
-It is set as dependency for build, but not included into the plugin jar file.
-
 When there is an option `debugPort`, a task named `debugOmegaT` is created which run OmegaT
 with a jvm debugger port.
+
+When launching `runOmegaT` or `debugOmegaT`, project will build jar file and place
+plugin into temporal configuration folder `build/omegat/plugins` then launch OmegaT.
 
 ### Step 3. Configure dependencies
 
