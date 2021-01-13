@@ -9,7 +9,6 @@ open class DebugTask : RunTask() {
 
      @TaskAction
      override fun exec() {
-          args = getArgList()
           jvmArgs("-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=$debugPort")
           super.exec()
      }

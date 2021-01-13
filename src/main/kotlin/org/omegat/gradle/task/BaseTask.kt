@@ -8,17 +8,16 @@ import org.gradle.api.tasks.TaskAction
 
 @CacheableTask
 open class BaseTask : JavaExec() {
+    @Input
+    protected val argList = mutableListOf<String>()
+
+    @Input
+    var projectDir: String
+
     init {
         group = "org.omegat"
         main = "org.omegat.Main"
-    }
-
-    @Input
-    var projectDir: String = project.rootDir.toString()
-
-    @Input
-    protected fun getArgList(): MutableList<String> {
-        val argList: MutableList<String> = mutableListOf(projectDir)
+        projectDir = project.rootDir.toString()
         if (hasProperty("user.language")) {
             argList.add("-Duser.language=" + property("user.language"))
             if (hasProperty("user.country")) {
@@ -28,13 +27,14 @@ open class BaseTask : JavaExec() {
         if (hasProperty("http.proxyHost")) {
             argList.add("-Dhttp.proxyHost=" + property("http.proxyHost"))
         }
-        return argList
     }
 
     @TaskAction
     override fun exec() {
         maxHeapSize = "2048M"
         classpath = project.configurations.getByName("omegat")
+        argList.apply {add(projectDir)}
+        argList.also { args = it }
         super.exec()
     }
 }

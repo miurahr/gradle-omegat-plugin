@@ -11,10 +11,14 @@ fun Project.setupOmegatTasks(extension: PluginExtension) {
     tasks.register("translate", TranslateTask::class.java) { task ->
         task.projectDir = extension.projectDir.toString()
     }
-    tasks.register("runOmegaT", RunTask::class.java)
-    tasks.register("debugOmegaT", DebugTask::class.java)
+    tasks.register("runOmegaT", RunTask::class.java) { task ->
+        task.projectDir = extension.projectDir.toString()
+    }
+    tasks.register("debugOmegaT", DebugTask::class.java) { task ->
+        task.projectDir = extension.projectDir.toString()
+    }
     afterEvaluate {
-        if (!File(extension.projectDir, "omegat.project").exists()) {
+        if (extension.pluginClass != null) {
             val jarTask = project.tasks.withType(Jar::class.java).getByName("jar")
             tasks.withType(RunTask::class.java).getByName("runOmegaT").apply {
                 dependsOn(jarTask)
@@ -66,7 +70,7 @@ fun Project.setupOmegatConfig(extension: PluginExtension) {
                 }
             }
         }
-        if (!File(extension.projectDir, "omegat.project").exists()) {
+        if (extension.pluginClass != null) {
             project.configurations.run {
                 getByName("implementation").apply {
                     extendsFrom(getByName("packIntoJar"))
