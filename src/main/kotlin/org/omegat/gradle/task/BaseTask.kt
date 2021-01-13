@@ -12,12 +12,11 @@ open class BaseTask : JavaExec() {
     protected val argList = mutableListOf<String>()
 
     @Input
-    var projectDir: String
+    var projectDir: String? = null
 
     init {
         group = "org.omegat"
         main = "org.omegat.Main"
-        projectDir = project.rootDir.toString()
         if (hasProperty("user.language")) {
             argList.add("-Duser.language=" + property("user.language"))
             if (hasProperty("user.country")) {
@@ -33,7 +32,6 @@ open class BaseTask : JavaExec() {
     override fun exec() {
         maxHeapSize = "2048M"
         classpath = project.configurations.getByName("omegat")
-        argList.apply {add(projectDir)}
         argList.also { args = it }
         super.exec()
     }

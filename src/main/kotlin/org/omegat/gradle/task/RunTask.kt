@@ -7,6 +7,7 @@ open class RunTask : BaseTask()  {
     @TaskAction
     override fun exec() {
         argList.apply {
+            projectDir?.let { add(it) }
             add("--config-dir=${File(project.buildDir, "omegat")}")
         }
         super.exec()
