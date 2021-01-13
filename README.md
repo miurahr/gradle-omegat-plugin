@@ -22,14 +22,14 @@ To apply the plugin, please add one of the following snippets to your `build.gra
 
 ```groovy
 plugins {
-    id 'org.omegat.gradle' version '1.2.5'
+    id 'org.omegat.gradle' version '1.3.2'
 }
 ```
-or `build.gradle.kts` file in Kotlin;
+or `build.gradle.kts` in Kotlin;
 
 ```kotlin
 plugins {
-    id("org.omegat.gradle") version "1.2.5"
+    id("org.omegat.gradle") version "1.3.2"
 }
 ```
 
@@ -42,8 +42,14 @@ omegat {
     projectDir "path/to/omegat/team/project"
 }
 ```
+or kotlin
+```kotlin
+omegat {
+    projectDir = "path/to/omegat/project"
+}
+```
 
-If not specified, the OmegaT plugin assumes project directory `$projectDir` is an omegat project root.
+If not specified projectDir, the OmegaT plugin assumes project root is an omegat project.
 
 ###  Call translation
 
@@ -62,9 +68,16 @@ To apply the plugin, please add one of the following snippets to your `build.gra
 
 ```groovy
 plugins {
-    id 'org.omegat.gradle' version '1.2.5'
+    id 'org.omegat.gradle' version '1.3.2'
 }
 ```
+or in kotlin
+```kotlin
+plugins {
+    id("org.omegat.gralde") version "1.3.2"
+}
+```
+
 
 ### Step 2: `omegat` configuration closure to your `build.gradle` file
 
@@ -73,6 +86,7 @@ omegat {
     version '5.2.0' // available: 5.2.0, 5.4.1: default
     pluginClass "your.plugin.main.className" // mandatory for plugin development
     debugPort = 5566 // specify when you use a debugger
+    projectDir = File(project.projectDir, "test-omt-project").toString()
 }
 ```
 
@@ -81,7 +95,9 @@ When there is an option `debugPort`, a task named `debugOmegaT` is created which
 with a jvm debugger port.
 
 When launching `runOmegaT` or `debugOmegaT`, project will build jar file and place
-plugin into temporal configuration folder `build/omegat/plugins` then launch OmegaT.
+plugin into temporal configuration folder `build/omegat/plugins` then launch OmegaT
+and open OmegaT project at configured as `omegat.projectDir`
+
 
 ### Step 3. Configure dependencies
 

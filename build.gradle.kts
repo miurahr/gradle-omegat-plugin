@@ -5,7 +5,7 @@ plugins {
     `maven-publish`
 }
 group = "org.omegat"
-version = "1.3.1"
+version = "1.3.2"
 
 tasks.compileJava {
     options.release.set(8)
