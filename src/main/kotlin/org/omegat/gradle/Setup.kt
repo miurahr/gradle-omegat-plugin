@@ -1,10 +1,21 @@
 package org.omegat.gradle.task
 
 import org.gradle.api.Project
+import org.gradle.api.artifacts.Configuration
+import org.gradle.api.artifacts.ExcludeRule
+import org.gradle.api.artifacts.ExternalModuleDependency
+import org.gradle.api.artifacts.dsl.DependencyHandler
+import org.gradle.api.plugins.JavaPluginConvention
 import org.gradle.jvm.tasks.Jar
 import org.omegat.gradle.config.DefaultModule
 import org.omegat.gradle.config.PluginExtension
 import java.io.File
+
+
+const val GROUP_OMEGAT = "org.omegat"
+const val ARTIFACT_OMEGAT = "omegat"
+const val GROUP_OMEGAT_PLUGIN = "org.omegat.plugins"
+const val VERSION_SNAPSHOT = "1.0-SNAPSHOT"
 
 
 fun Project.setupOmegatTasks(extension: PluginExtension) {
@@ -19,6 +30,11 @@ fun Project.setupOmegatTasks(extension: PluginExtension) {
     }
     afterEvaluate {
         if (extension.pluginClass != null) {
+            tasks.create("compile_minVersion",
+                CustomOmTVersionCompile::class.java,
+                { extension.manifest.minVersion as String },
+                convention.getPlugin(JavaPluginConvention::class.java).sourceSets.getByName("main")
+            )
             val jarTask = project.tasks.withType(Jar::class.java).getByName("jar")
             tasks.withType(RunTask::class.java).getByName("runOmegaT").apply {
                 dependsOn(jarTask)
@@ -30,8 +46,7 @@ fun Project.setupOmegatTasks(extension: PluginExtension) {
             jarTask.outputs.upToDateWhen { false }
             jarTask.doFirst { task ->
                 if (extension.pluginClass != null) {
-                    val atts: Map<String, String?> = mapOf("OmegaT-Plugins" to extension.pluginClass)
-                    jarTask.manifest.attributes(atts)
+                    jarTask.manifest.attributes(extension.manifest.createOmegatPluginJarManifest())
                 }
                 jarTask.from(
                     task.project.configurations.getByName("packIntoJar").files.map { file ->
@@ -87,3 +102,21 @@ fun Project.setupOmegatConfig(extension: PluginExtension) {
         }
     }
 }
+
+/**
+ * Creates a dependency on OmegaT using the given version number
+ * @param [version] the version for OmegaT
+ * @return the dependency as created by [DependencyHandler.create]
+ */
+fun DependencyHandler.createOmegaT(version: String): ExternalModuleDependency {
+    return (this.create("$GROUP_OMEGAT:$ARTIFACT_OMEGAT:$version") as ExternalModuleDependency)
+}
+
+fun DependencyHandler.createOmegaTPlugin(name: String): ExternalModuleDependency {
+    return (this.create("$GROUP_OMEGAT_PLUGIN:$name:$VERSION_SNAPSHOT") as ExternalModuleDependency)
+}
+
+/**
+ * Exclude the dependency on OmegaT from the given configuration (if present)
+ */
+fun Configuration.excludeOmegaT(): Configuration = this.exclude(mapOf(ExcludeRule.GROUP_KEY to GROUP_OMEGAT, ExcludeRule.MODULE_KEY to ARTIFACT_OMEGAT))
