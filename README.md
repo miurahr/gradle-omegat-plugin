@@ -114,3 +114,28 @@ dependencies {
     // ...
 }
 ```
+
+### Step 4. Setup plugin properties
+
+There are several plugin information to be managed on OmegaT preference.
+You can set it on `gradle.properties` file, and the plugin generate proper manifest records.
+Here is an example.
+
+```properties
+plugin.author="Plugin developer name"
+plugin.description="A plugin to look up online dictionary"
+plugin.link=https://github.com/miurahr/omegat-onlinedictionary
+```
+
+Here is a table how properties becomes manifest record;
+
+
+| Data | plugin manifest | gradle.properties | gradle standard property |
+| ---- | --------------- | ----------------- | ------------------------ |
+| Name | Plugin-Name     | n/a               | rootProject.name         |
+| Version | Plugin-Version | n/a             | version                  |
+| Author | Plugin-Author | `plugin.author`   | n/a                      |
+| Description | Plugin-Description | `plugin.description` | n/a         |
+| Website     | Plugin-Link | `plugin.link`  | n/a                      |
+
+
