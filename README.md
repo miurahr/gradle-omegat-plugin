@@ -22,14 +22,14 @@ To apply the plugin, please add one of the following snippets to your `build.gra
 
 ```groovy
 plugins {
-    id 'org.omegat.gradle' version '1.3.2'
+    id 'org.omegat.gradle' version '1.4.0'
 }
 ```
 or `build.gradle.kts` in Kotlin;
 
 ```kotlin
 plugins {
-    id("org.omegat.gradle") version "1.3.2"
+    id("org.omegat.gradle") version "1.4.0"
 }
 ```
 
@@ -59,7 +59,6 @@ $ ./gradlew translate
 
 This will generate translation result in OmegaT target directory.
 
-
 ## Development of a custom OmegaT plugin
 
 ### Step 1: Apply the plugin to your Gradle script
@@ -68,23 +67,22 @@ To apply the plugin, please add one of the following snippets to your `build.gra
 
 ```groovy
 plugins {
-    id 'org.omegat.gradle' version '1.3.2'
+    id 'org.omegat.gradle' version '1.4.0'
 }
 ```
 or in kotlin
 ```kotlin
 plugins {
-    id("org.omegat.gralde") version "1.3.2"
+    id("org.omegat.gralde") version "1.4.0"
 }
 ```
-
 
 ### Step 2: `omegat` configuration closure to your `build.gradle` file
 
 ```groovy
 omegat {
-    version '5.2.0' // available: 5.2.0, 5.4.1: default
-    pluginClass "your.plugin.main.className" // mandatory for plugin development
+    version = "5.3.0" // available: 5.4.1:default, 5.3.0, 5.2.0, 5.1.0, 5.0.0, 4.3.0
+    pluginClass = "your.plugin.main.className" // mandatory for plugin development
     debugPort = 5566 // specify when you use a debugger
     projectDir = File(project.projectDir, "test-omt-project").toString()
 }
@@ -98,7 +96,6 @@ When launching `runOmegaT` or `debugOmegaT`, project will build jar file and pla
 plugin into temporal configuration folder `build/omegat/plugins` then launch OmegaT
 and open OmegaT project at configured as `omegat.projectDir`
 
-
 ### Step 3. Configure dependencies
 
 You can put dependencies with packIntoJar configuration, dependencies are bundled with plugin as Fat-Jar.
@@ -109,8 +106,19 @@ It is because commons-io is dependency of OmegaT, so we can use it without bundl
 ```groovy
 dependencies {
     packIntoJar 'org.slf4j:slf4j-api:1.7.25'
-    compile 'commons-io:commons-io:2.5'
-    compile 'commons-lang:commons-lang:2.6'
+    implementation 'commons-io:commons-io:2.5'
+    implementation 'commons-lang:commons-lang:2.6'
+    // ...
+}
+```
+
+or in kotlin;
+
+```kotlin
+dependencies {
+    packIntoJar("org.slf4j:slf4j-api:1.7.25")
+    implementation("commons-io:commons-io:2.5")
+    implementation("commons-lang:commons-lang:2.6")
     // ...
 }
 ```
@@ -129,7 +137,6 @@ plugin.link=https://github.com/miurahr/omegat-onlinedictionary
 
 Here is a table how properties becomes manifest record;
 
-
 | Data | plugin manifest | gradle.properties | gradle standard property |
 | ---- | --------------- | ----------------- | ------------------------ |
 | Name | Plugin-Name     | n/a               | rootProject.name         |
@@ -137,5 +144,3 @@ Here is a table how properties becomes manifest record;
 | Author | Plugin-Author | `plugin.author`   | n/a                      |
 | Description | Plugin-Description | `plugin.description` | n/a         |
 | Website     | Plugin-Link | `plugin.link`  | n/a                      |
-
-
