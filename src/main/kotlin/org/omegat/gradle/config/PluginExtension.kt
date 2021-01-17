@@ -17,6 +17,8 @@ open class PluginExtension(val project: Project) {
     var pluginClass: String? = null
     var debugPort: Int? = null
 
+    val manifest: OmegatManifest = OmegatManifest(project, this)
+
     /**
      * Set the [packIntoJarFileFilter] with a Groovy [Closure]
      */
