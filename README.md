@@ -130,8 +130,8 @@ You can set it on `gradle.properties` file, and the plugin generate proper manif
 Here is an example.
 
 ```properties
-plugin.author="Plugin developer name"
-plugin.description="A plugin to look up online dictionary"
+plugin.author=Plugin developer name
+plugin.description=A plugin to look up online dictionary
 plugin.link=https://github.com/miurahr/omegat-onlinedictionary
 ```
 
