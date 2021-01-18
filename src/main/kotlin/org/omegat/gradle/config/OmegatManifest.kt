@@ -6,7 +6,7 @@ import java.net.URL
 class OmegatManifest(private val project: Project, private val extension: PluginExtension) {
 
     object Attribute {
-        const val PLUGIN_NAME = "Pluign-Name"
+        const val PLUGIN_NAME = "Plugin-Name"
         const val PLUGIN_AUTHOR = "Plugin-Author"
         const val PLUGIN_VERSION = "Plugin-Version"
         const val PLUGIN_DESCRIPTION = "Plugin-Description"
