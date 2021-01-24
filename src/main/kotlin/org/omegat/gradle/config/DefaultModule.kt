@@ -2,7 +2,7 @@ package org.omegat.gradle.config
 
 import org.gradle.api.Project
 import org.omegat.gradle.OmegatPlugin
-import java.util.*
+import java.util.Properties
 
 class DefaultModule(val project: Project) {
     private val props = Properties()
