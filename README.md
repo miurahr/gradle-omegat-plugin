@@ -145,7 +145,7 @@ Here is a table how properties becomes manifest record;
 | Description | Plugin-Description | `plugin.description` | n/a         |
 | Website     | Plugin-Link | `plugin.link`  | n/a                      |
 | Category | Plugin-Category | `plugin.category` | n/a                  |
-| Built environment | Built-By | n/a  | n/a                             |
+| Built environment | Created-By | n/a  | n/a                             |
 | Date | Plugin-Date | n/a  | n/a                                       |
 | Class name | OmegaT-Plugins | n/a  | n/a                               | 
 
