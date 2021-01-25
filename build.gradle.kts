@@ -3,6 +3,7 @@ plugins {
     `java-gradle-plugin`
     id("com.gradle.plugin-publish") version "0.12.0"
     `maven-publish`
+    id("org.jetbrains.dokka") version "1.4.20"
 }
 group = "org.omegat"
 version = "1.4.2-SNAPSHOT"
@@ -37,6 +38,14 @@ gradlePlugin {
         id = "org.omegat.gradle"
         implementationClass = "org.omegat.gradle.OmegatPlugin"
     }
+}
+
+tasks.dokkaHtml {
+    outputDirectory.set(tasks.javadoc.get().destinationDir)
+}
+
+val javadocJar = task<Jar>("javadocJar") {
+    dependsOn(tasks.dokkaHtml)
 }
 
 publishing {
