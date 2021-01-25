@@ -3,6 +3,13 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Added
+- Add more manifest property keys: Plugin-Link, Plugin-Category, Created-By, and Plugin-Date
+
+### Changed
+- Signature of OmegatManifest constructor.
+
+
 ## [1.4.1] - 2021-01-18
 
 ### Fixed

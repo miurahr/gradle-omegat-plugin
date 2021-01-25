@@ -22,14 +22,14 @@ To apply the plugin, please add one of the following snippets to your `build.gra
 
 ```groovy
 plugins {
-    id 'org.omegat.gradle' version '1.4.0'
+    id 'org.omegat.gradle' version '1.4.2'
 }
 ```
 or `build.gradle.kts` in Kotlin;
 
 ```kotlin
 plugins {
-    id("org.omegat.gradle") version "1.4.0"
+    id("org.omegat.gradle") version "1.4.2"
 }
 ```
 
@@ -67,13 +67,13 @@ To apply the plugin, please add one of the following snippets to your `build.gra
 
 ```groovy
 plugins {
-    id 'org.omegat.gradle' version '1.4.0'
+    id 'org.omegat.gradle' version '1.4.2'
 }
 ```
 or in kotlin
 ```kotlin
 plugins {
-    id("org.omegat.gralde") version "1.4.0"
+    id("org.omegat.gralde") version "1.4.2"
 }
 ```
 
@@ -101,7 +101,7 @@ and open OmegaT project at configured as `omegat.projectDir`
 You can put dependencies with packIntoJar configuration, dependencies are bundled with plugin as Fat-Jar.
 Libraries other than packIntoJar such as implementation, compile etc. are used to compile but not bundled.
 A following example illustrate how to use, and slf4j-api is going to be bundled, and commons-io library is not.
-It is because commons-io is dependency of OmegaT, so we can use it without bundled.
+It is because commons-io is a dependency of OmegaT, so we can use it without bundled.
 
 ```groovy
 dependencies {
@@ -139,8 +139,19 @@ Here is a table how properties becomes manifest record;
 
 | Data | plugin manifest | gradle.properties | gradle standard property |
 | ---- | --------------- | ----------------- | ------------------------ |
-| Name | Plugin-Name     | n/a               | rootProject.name         |
+| Name | Plugin-Name     | `plugin.name`     | rootProject.name         |
 | Version | Plugin-Version | n/a             | version                  |
 | Author | Plugin-Author | `plugin.author`   | n/a                      |
 | Description | Plugin-Description | `plugin.description` | n/a         |
 | Website     | Plugin-Link | `plugin.link`  | n/a                      |
+| Category | Plugin-Category | `plugin.category` | n/a                  |
+| Built environment | Created-By | n/a  | n/a                           |
+| Date | Plugin-Date | n/a  | n/a                                       |
+| Class name | OmegaT-Plugins | n/a  | n/a                              |
+
+Plugin Name can be configured with `plugin.name` property. When it is not set,
+`rootProject.name` gradle property that is configured in `settings.gradle` is used.
+When both properties are not set, project directory name is used as
+same as ordinary gradle projects.
+Built environment and date records are automatically added to manifest.
+Class name is configured by extension `omegat.pluginClass` in `build.gradle`.

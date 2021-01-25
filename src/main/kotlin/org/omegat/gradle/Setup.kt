@@ -30,7 +30,7 @@ fun Project.setupOmegatTasks(extension: PluginExtension) {
             jarTask.outputs.upToDateWhen { false }
             jarTask.doFirst { task ->
                 if (extension.pluginClass != null) {
-                    jarTask.manifest.attributes(extension.manifest.createOmegatPluginJarManifest())
+                    jarTask.manifest.attributes(extension.manifest.createOmegatPluginJarManifest(extension))
                 }
                 jarTask.from(
                     task.project.configurations.getByName("packIntoJar").files.map { file ->
