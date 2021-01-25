@@ -22,14 +22,14 @@ To apply the plugin, please add one of the following snippets to your `build.gra
 
 ```groovy
 plugins {
-    id 'org.omegat.gradle' version '1.4.0'
+    id 'org.omegat.gradle' version '1.4.2'
 }
 ```
 or `build.gradle.kts` in Kotlin;
 
 ```kotlin
 plugins {
-    id("org.omegat.gradle") version "1.4.0"
+    id("org.omegat.gradle") version "1.4.2"
 }
 ```
 
@@ -67,13 +67,13 @@ To apply the plugin, please add one of the following snippets to your `build.gra
 
 ```groovy
 plugins {
-    id 'org.omegat.gradle' version '1.4.0'
+    id 'org.omegat.gradle' version '1.4.2'
 }
 ```
 or in kotlin
 ```kotlin
 plugins {
-    id("org.omegat.gralde") version "1.4.0"
+    id("org.omegat.gralde") version "1.4.2"
 }
 ```
 
@@ -145,9 +145,9 @@ Here is a table how properties becomes manifest record;
 | Description | Plugin-Description | `plugin.description` | n/a         |
 | Website     | Plugin-Link | `plugin.link`  | n/a                      |
 | Category | Plugin-Category | `plugin.category` | n/a                  |
-| Built environment | Created-By | n/a  | n/a                             |
+| Built environment | Created-By | n/a  | n/a                           |
 | Date | Plugin-Date | n/a  | n/a                                       |
-| Class name | OmegaT-Plugins | n/a  | n/a                               | 
+| Class name | OmegaT-Plugins | n/a  | n/a                              |
 
 Plugin Name can be configured with `plugin.name` property. When it is not set,
 `rootProject.name` gradle property that is configured in `settings.gradle` is used.

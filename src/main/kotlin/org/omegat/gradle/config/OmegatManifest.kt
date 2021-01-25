@@ -5,7 +5,7 @@ import java.net.URL
 import java.util.GregorianCalendar
 
 
-class OmegatManifest(private val project: Project, private val extension: PluginExtension) {
+class OmegatManifest(private val project: Project) {
 
     object Attribute {
         const val PLUGIN_NAME = "Plugin-Name"
@@ -28,7 +28,7 @@ class OmegatManifest(private val project: Project, private val extension: Plugin
             URL(project.findProperty("plugin.link").toString().removeSurrounding("\""))
         else null
 
-    fun createOmegatPluginJarManifest(): Map<String, String> {
+    fun createOmegatPluginJarManifest(extension: PluginExtension): Map<String, String> {
 
         val manifestAtts: MutableMap<String,String?> = mutableMapOf(
             Attribute.PLUGIN_NAME to if (name != null) name else extension.pluginName,

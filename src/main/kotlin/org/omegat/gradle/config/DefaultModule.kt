@@ -11,8 +11,8 @@ class DefaultModule(val project: Project) {
         props.load(OmegatPlugin::class.java.getResourceAsStream("omegat.properties"))
         project.repositories.jcenter()
         project.repositories.apply {
-            maven {
-                it.setUrl(props.getProperty("mavenRepositoryUrl"))
+            maven { artifactRepository ->
+                artifactRepository.setUrl(props.getProperty("mavenRepositoryUrl"))
             }
         }
     }
