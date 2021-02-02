@@ -24,7 +24,7 @@ dependencies {
 
 pluginBundle {
     vcsUrl = "https://github.com/miurahr/gradle-omegat.git"
-    website = "https://github.com/miurahr/gradle-omegat"
+    website = "https://github.com/miurahr/gradle-omegat-plugin"
     description = "OmegaT plugin for Gradle"
     tags = listOf("OmegaT")
     plugins.create("omegatPlugin") {
