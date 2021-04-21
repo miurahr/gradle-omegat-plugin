@@ -9,12 +9,7 @@ class DefaultModule(val project: Project) {
 
     init {
         props.load(OmegatPlugin::class.java.getResourceAsStream("omegat.properties"))
-        project.repositories.jcenter()
-        project.repositories.apply {
-            maven { artifactRepository ->
-                artifactRepository.setUrl(props.getProperty("mavenRepositoryUrl"))
-            }
-        }
+        project.repositories.mavenCentral()
     }
 
     fun getDependencies(version: String?): List<String> {
