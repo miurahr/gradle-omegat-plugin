@@ -22,14 +22,14 @@ To apply the plugin, please add one of the following snippets to your `build.gra
 
 ```groovy
 plugins {
-    id 'org.omegat.gradle' version '1.4.2'
+    id 'org.omegat.gradle' version '1.5.0'
 }
 ```
 or `build.gradle.kts` in Kotlin;
 
 ```kotlin
 plugins {
-    id("org.omegat.gradle") version "1.4.2"
+    id("org.omegat.gradle") version "1.5.0"
 }
 ```
 
@@ -67,13 +67,13 @@ To apply the plugin, please add one of the following snippets to your `build.gra
 
 ```groovy
 plugins {
-    id 'org.omegat.gradle' version '1.4.2'
+    id 'org.omegat.gradle' version '1.5.0'
 }
 ```
 or in kotlin
 ```kotlin
 plugins {
-    id("org.omegat.gralde") version "1.4.2"
+    id("org.omegat.gralde") version "1.5.0"
 }
 ```
 
@@ -81,7 +81,7 @@ plugins {
 
 ```groovy
 omegat {
-    version = "5.3.0" // available: 5.4.1:default, 5.3.0, 5.2.0, 5.1.0, 5.0.0, 4.3.0
+    version = "5.4.4" // available versions(as in May 2021): 5.4.4
     pluginClass = "your.plugin.main.className" // mandatory for plugin development
     debugPort = 5566 // specify when you use a debugger
     projectDir = File(project.projectDir, "test-omt-project").toString()

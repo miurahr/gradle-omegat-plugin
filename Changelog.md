@@ -3,7 +3,15 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
-## [1.4.2] - 20201-01-25
+## [1.5.0] - 2021-05-18
+
+### Added
+- Add Plugin-Id property.
+
+### Changed
+- Retrieve OmegaT and related packages from MavenCentral(moved).
+
+## [1.4.2] - 2021-01-25
 
 ### Added
 - Add more manifest property keys: Plugin-Link, Plugin-Category, Created-By, and Plugin-Date
@@ -82,7 +90,8 @@ All notable changes to this project will be documented in this file.
 ## [0.9.4] - 2017-2-22
 ## [0.9.1] - 2016-9-25
 
-[Unreleased]: https://github.com/miurahr/omegat-textra-plugin/compare/v1.4.2...HEAD
+[Unreleased]: https://github.com/miurahr/omegat-textra-plugin/compare/v1.5.0...HEAD
+[1.5.0]: https://github.com/miurahr/omegat-textra-plugin/compare/v1.4.2...v1.5.0
 [1.4.2]: https://github.com/miurahr/omegat-textra-plugin/compare/v1.4.1...v1.4.2
 [1.4.1]: https://github.com/miurahr/omegat-textra-plugin/compare/v1.4.0...v1.4.1
 [1.4.0]: https://github.com/miurahr/omegat-textra-plugin/compare/v1.3.2...v1.4.0

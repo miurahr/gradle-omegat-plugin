@@ -6,7 +6,7 @@ plugins {
     id("org.jetbrains.dokka") version "1.4.20"
 }
 group = "org.omegat"
-version = "1.4.2"
+version = "1.5.0"
 
 tasks.compileJava {
     options.release.set(8)
