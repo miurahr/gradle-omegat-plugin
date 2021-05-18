@@ -3,7 +3,7 @@ plugins {
     `java-gradle-plugin`
     id("com.gradle.plugin-publish") version "0.12.0"
     `maven-publish`
-    id("org.jetbrains.dokka") version "1.4.20"
+    id("org.jetbrains.dokka") version "1.4.32"
 }
 group = "org.omegat"
 version = "1.5.0"
