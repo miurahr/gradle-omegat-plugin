@@ -1,7 +1,7 @@
 plugins {
     kotlin("jvm") version "1.5.0"
     `java-gradle-plugin`
-    id("com.gradle.plugin-publish") version "0.14.0"
+    id("com.gradle.plugin-publish") version "0.15.0"
     `maven-publish`
     id("org.jetbrains.dokka") version "1.4.32"
 }
