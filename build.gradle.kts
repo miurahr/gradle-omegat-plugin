@@ -6,14 +6,14 @@ plugins {
     id("org.jetbrains.dokka") version "1.4.32"
 }
 group = "org.omegat"
-version = "1.5.0"
+version = "1.5.3"
 
 tasks.compileJava {
     options.release.set(8)
 }
 
 repositories {
-    jcenter()
+    mavenCentral()
 }
 
 dependencies {
