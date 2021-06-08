@@ -1,13 +1,12 @@
 # Change Log
 All notable changes to this project will be documented in this file.
+
 ## [Unreleased]
 
-## [1.5.2] - 2021-06-08
+## [1.5.3] - 2021-06-08
 
 ### FIXED
 - CI: release script affected by changing to setup-java@2.1.0
-
-## [1.5.1] - 2021-06-08
 
 ### Added
 - Enable dependabot
@@ -16,6 +15,7 @@ All notable changes to this project will be documented in this file.
 - Remove Plugin-Id property.
 
 ### Changed
+- Drop configuration of jCenter
 - Bump Gralde@6.9
 - Bump Kotlin(JVM)@1.5.0
 - Bump gradle-plugin-publish@0.14.0
@@ -113,9 +113,8 @@ All notable changes to this project will be documented in this file.
 ## [0.9.1] - 2016-9-25
 
 
-[Unreleased]: https://github.com/miurahr/omegat-textra-plugin/compare/v1.5.2...HEAD
-[1.5.2]: https://github.com/miurahr/omegat-textra-plugin/compare/v1.5.1...v1.5.2
-[1.5.1]: https://github.com/miurahr/omegat-textra-plugin/compare/v1.5.0...v1.5.1
+[Unreleased]: https://github.com/miurahr/omegat-textra-plugin/compare/v1.5.3...HEAD
+[1.5.3]: https://github.com/miurahr/omegat-textra-plugin/compare/v1.5.0...v1.5.3
 [1.5.0]: https://github.com/miurahr/omegat-textra-plugin/compare/v1.4.2...v1.5.0
 [1.4.2]: https://github.com/miurahr/omegat-textra-plugin/compare/v1.4.1...v1.4.2
 [1.4.1]: https://github.com/miurahr/omegat-textra-plugin/compare/v1.4.0...v1.4.1
