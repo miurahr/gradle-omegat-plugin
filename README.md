@@ -139,7 +139,6 @@ Here is a table how properties becomes manifest record;
 
 | Data | plugin manifest | gradle.properties | gradle standard property |
 | ---- | --------------- | ----------------- | ------------------------ |
-| Id   | Plugin-Id       | `plugin.id`       | rootProject.name         |
 | Name | Plugin-Name     | `plugin.name`     | rootProject.name         |
 | Version | Plugin-Version | n/a             | version                  |
 | Author | Plugin-Author | `plugin.author`   | n/a                      |
@@ -154,12 +153,5 @@ Plugin Name can be configured with `plugin.name` property. When it is not set,
 `rootProject.name` gradle property that is configured in `settings.gradle` is used.
 When both properties are not set, project directory name is used as
 same as ordinary gradle projects.
-Plugin ID can be configured with `plugin.id` property.
-When it is not set, project name is used as same fallback as Plugin Name.
-
-Plugin Name is used for UI and should be human readable.
-Plugin ID is used for identify plugins that should consistent among versions
-and unique.
-
 Built environment and date records are automatically added to manifest.
 Class name is configured by extension `omegat.pluginClass` in `build.gradle`.

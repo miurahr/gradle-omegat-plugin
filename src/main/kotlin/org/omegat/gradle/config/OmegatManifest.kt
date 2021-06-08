@@ -9,7 +9,6 @@ class OmegatManifest(private val project: Project) {
 
     object Attribute {
         const val PLUGIN_NAME = "Plugin-Name"
-        const val PLUGIN_ID = "Plugin-Id"
         const val PLUGIN_AUTHOR = "Plugin-Author"
         const val PLUGIN_VERSION = "Plugin-Version"
         const val PLUGIN_DESCRIPTION = "Plugin-Description"
@@ -21,7 +20,6 @@ class OmegatManifest(private val project: Project) {
     }
 
     var name: String? = project.findProperty("plugin.name")?.toString()
-    var id: String? = project.findProperty("plugin.id")?.toString()
     var author: String? = project.findProperty("plugin.author")?.toString()
     var description: String? = project.findProperty("plugin.description")?.toString()
     var category: String? = project.findProperty("plugin.category")?.toString()
@@ -33,7 +31,6 @@ class OmegatManifest(private val project: Project) {
     fun createOmegatPluginJarManifest(extension: PluginExtension): Map<String, String> {
 
         val manifestAtts: MutableMap<String,String?> = mutableMapOf(
-            Attribute.PLUGIN_ID to if (id != null) id else extension.pluginName,
             Attribute.PLUGIN_NAME to if (name != null) name else extension.pluginName,
             Attribute.PLUGIN_AUTHOR to author,
             Attribute.PLUGIN_MAIN_CLASS to extension.pluginClass,
