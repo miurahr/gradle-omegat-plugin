@@ -15,7 +15,7 @@ jobs:
       name: gradle build
       with:
         arguments: build
-    - uses: actions/upload-artifact@v2.2.3
+    - uses: actions/upload-artifact@v2.2.4
       with:
         name: Package
         path: build/libs
