@@ -57,7 +57,7 @@ fun Project.setupOmegatTasks(extension: PluginExtension) {
 fun Project.setupOmegatConfig(extension: PluginExtension) {
     project.configurations.run {
         val config = create("packIntoJar")
-        config.setVisible(false).setTransitive(true).setDescription("The OmegaT configuration for this project.")
+        config.setVisible(false).setTransitive(true).description = "The OmegaT configuration for this project."
         create("omegat")
     }
     afterEvaluate {
