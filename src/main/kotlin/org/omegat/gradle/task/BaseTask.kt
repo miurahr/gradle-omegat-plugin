@@ -16,7 +16,7 @@ open class BaseTask : JavaExec() {
 
     init {
         group = "org.omegat"
-        main = "org.omegat.Main"
+        mainClass.set("org.omegat.Main")
         if (hasProperty("user.language")) {
             argList.add("-Duser.language=" + property("user.language"))
             if (hasProperty("user.country")) {
