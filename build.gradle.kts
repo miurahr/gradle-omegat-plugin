@@ -1,8 +1,8 @@
 plugins {
     kotlin("jvm") version "1.6.10"
-    `java-gradle-plugin`
+    id("java-gradle-plugin")  // for plugin authoring
+    id ("maven-publish")  // for metadata
     id("com.gradle.plugin-publish") version "0.19.0"  // for publish to plugin portal
-    `maven-publish`  // for publish to mavenLocal
 }
 
 group = "org.omegat"
@@ -22,23 +22,24 @@ dependencies {
 }
 
 pluginBundle {
-    vcsUrl = "https://github.com/miurahr/gradle-omegat.git"
+    vcsUrl = "https://github.com/miurahr/gradle-omegat-plugin.git"
     website = "https://github.com/miurahr/gradle-omegat-plugin"
-    description = "OmegaT plugin for Gradle"
     tags = listOf("OmegaT", "translation", "plugin development")
-    plugins.create("omegatPlugin") {
-        id = "org.omegat.gradle"
-        displayName = "OmegaT plugin"
-    }
 }
 
 gradlePlugin {
     plugins.create("omegatPlugin") {
         id = "org.omegat.gradle"
         implementationClass = "org.omegat.gradle.OmegatPlugin"
+        displayName = "OmegaT"
+        description = "OmegaT plugin for Gradle allow users to run translation tasks with gradle," +
+                " which intend to help task automation on CI/CD platform such as Github actions, or travis-ci." +
+                "The plugin also provide a dependency management, manifest generation, omegat runner with debugger" +
+                " and fat-jar generation for omegat-plugin development."
     }
 }
 
+// publish plugin into local repository
 publishing {
   publications.withType(MavenPublication::class).all {
     if (name == "pluginMaven") {
