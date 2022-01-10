@@ -29,8 +29,12 @@ fun Project.setupOmegatTasks(extension: PluginExtension) {
             }
             jarTask.outputs.upToDateWhen { false }
             jarTask.doFirst { task ->
-                if (extension.pluginClass != null) {
-                    jarTask.manifest.attributes(extension.manifest.createOmegatPluginJarManifest(extension))
+                val pluginName = project.findProperty("plugin.name")
+                if (extension.pluginClass != null && pluginName != null) {
+                    val className: String = extension.pluginClass.toString()
+                    jarTask.manifest.attributes(
+                        extension.manifest.createOmegatPluginJarManifest(className, pluginName.toString())
+                    )
                 }
                 jarTask.from(
                     task.project.configurations.getByName("packIntoJar").files.map { file ->
