@@ -169,9 +169,6 @@ Here is a table how properties becomes manifest record;
 | Date               | Plugin-Date        | n/a                  | n/a                 | n/a              |
 | Class name         | OmegaT-Plugins     | n/a                  | n/a                 | n/a              |
 
-Plugin Name can be configured with `plugin.name` property. When it is not set,
-`rootProject.name` gradle property that is configured in `settings.gradle` is used.
-When both properties are not set, project directory name is used as
-same as ordinary gradle projects.
-Built environment and date records are automatically added to manifest.
-Class name is configured by extension `omegat.pluginClass` in `build.gradle`.
+- Plugin Name can be configured with `plugin.name` property. When it is not set, it is configured by using extension `omegat.pluginName` in `build.gradle`.
+- Built environment and date records are automatically added to manifest.
+- Class name is configured by extension `omegat.pluginClass` in `build.gradle`.
