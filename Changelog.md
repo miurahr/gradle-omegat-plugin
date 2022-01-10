@@ -3,6 +3,22 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.5.4] - 2021-01-09
+
+### Changed
+- Does not use project.name as Plugin-Name. 
+- plugin.name` property or `omegat { pluginName }` is mandatory.
+- Bump Versions
+  - gradle@7.3.3
+    - plugin-publish@0.19.0
+    - kotlin@1.6.10
+  - actions
+    - setup-java@2.5.0
+      - temurin opnejdk 8
+    - upload-artifact@2.3.1
+    - checkout@2.4.0
+- Drop dependency for Dokka
+ 
 ## [1.5.3] - 2021-06-08
 
 ### FIXED
@@ -113,7 +129,8 @@ All notable changes to this project will be documented in this file.
 ## [0.9.1] - 2016-9-25
 
 
-[Unreleased]: https://github.com/miurahr/omegat-textra-plugin/compare/v1.5.3...HEAD
+[Unreleased]: https://github.com/miurahr/omegat-textra-plugin/compare/v1.5.4...HEAD
+[1.5.4]: https://github.com/miurahr/omegat-textra-plugin/compare/v1.5.3...v1.5.4
 [1.5.3]: https://github.com/miurahr/omegat-textra-plugin/compare/v1.5.0...v1.5.3
 [1.5.0]: https://github.com/miurahr/omegat-textra-plugin/compare/v1.4.2...v1.5.0
 [1.4.2]: https://github.com/miurahr/omegat-textra-plugin/compare/v1.4.1...v1.4.2
