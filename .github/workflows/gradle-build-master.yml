@@ -18,8 +18,3 @@ jobs:
     - uses: gradle/gradle-build-action@v2
     - name: gradle build and validate plugin
       run:  ./gradlew build validatePlugins
-    - name: publish plugin to portal (dry-run)
-      run: ./gradlew publishPlugins --dry-run
-      env:
-        ORG_GRADLE_PROJECT_gradle.publish.key: ${{ secrets.GRADLE_PUBLISH_KEY }}
-        ORG_GRADLE_PROJECT_gradle.publish.secret: ${{ secrets.GRADLE_PUBLISH_SECRET }}
