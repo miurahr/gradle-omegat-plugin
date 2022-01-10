@@ -22,14 +22,14 @@ To apply the plugin, please add one of the following snippets to your `build.gra
 
 ```groovy
 plugins {
-    id 'org.omegat.gradle' version '1.5.4'
+    id 'org.omegat.gradle' version '1.5.6'
 }
 ```
 or `build.gradle.kts` in Kotlin;
 
 ```kotlin
 plugins {
-    id("org.omegat.gradle") version "1.5.4"
+    id("org.omegat.gradle") version "1.5.6"
 }
 ```
 
@@ -67,13 +67,13 @@ To apply the plugin, please add one of the following snippets to your `build.gra
 
 ```groovy
 plugins {
-    id 'org.omegat.gradle' version '1.5.4'
+    id 'org.omegat.gradle' version '1.5.6'
 }
 ```
 or in kotlin
 ```kotlin
 plugins {
-    id("org.omegat.gralde") version "1.5.4"
+    id("org.omegat.gralde") version "1.5.6"
 }
 ```
 
