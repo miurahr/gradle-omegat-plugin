@@ -3,11 +3,11 @@ on:
     tags:
     - 'v*'
 
-name: make Release and publish to p.g.o
+name: Make github release and publish to p.g.o
 
 jobs:
   build:
-    name: Upload Release Asset
+    name: Make github release and publish to p.g.o
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
@@ -20,13 +20,11 @@ jobs:
       id: get_version
       run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\/v/}
     - uses: gradle/gradle-build-action@v2
+    - name: validate plugin
+      run: ./gradlew validatePlugins
     - name: publish plugin to portal
-      run: |
-        ./gradlew validatePlugins publishPlugins
-      env:
-        GRADLE_PUBLISH_KEY: ${{ secrets.GRADLE_PUBLISH_KEY }}
-        GRADLE_PUBLISH_SECRET: ${{ secrets.GRADLE_PUBLISH_SECRET }}
-    - name: Create Release
+      run: ./gradlew publishPlugins -Pgradle.publish.key=${{ secrets.GRADLE_PUBLISH_KEY }} -Pgradle.publish.secret=${{ secrets.GRADLE_PUBLISH_SECRET }}
+    - name: Create Github Release
       id: create_release
       uses: actions/create-release@v1
       env:
