@@ -1,7 +1,7 @@
 plugins {
     kotlin("jvm") version "1.6.10"
     `java-gradle-plugin`
-    id("com.gradle.plugin-publish") version "0.18.0"
+    id("com.gradle.plugin-publish") version "0.19.0"
     `maven-publish`
 }
 group = "org.omegat"
