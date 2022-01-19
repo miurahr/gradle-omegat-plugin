@@ -2,7 +2,7 @@ plugins {
     kotlin("jvm") version "1.6.10"
     id("java-gradle-plugin")  // for plugin authoring
     id ("maven-publish")  // for metadata
-    id("com.gradle.plugin-publish") version "0.19.0"  // for publish to plugin portal
+    id("com.gradle.plugin-publish") version "0.20.0"  // for publish to plugin portal
 }
 
 group = "org.omegat"
