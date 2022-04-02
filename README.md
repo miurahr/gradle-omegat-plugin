@@ -86,11 +86,10 @@ for groovy DSL
 
 ```groovy
 omegat {
+    pluginClass = "your.plugin.package.and.className" // mandatory for plugin development
     version = "5.4.4" // (optional) Build against OmegaT version;
                       // available versions(as in Jan. 2022): 5.4.4, 5.5.0, 5.6.0, 5.7.0
     debugPort = 5566 // (optional) when you use a java debugger, no need when use IDEs
-    pluginClass = "your.plugin.package.and.className" // mandatory for plugin development
-    pluginName = "Human readable plugin name"  // when property plugin.name dees not exist this is used
 }
 ```
 
@@ -98,11 +97,10 @@ for kotlin DSL
 
 ```kotlin
 omegat {
+    pluginClass = "your.plugin.package.and.className" // mandatory for plugin development
     version = "5.4.4" // (optional) Build against OmegaT version;
                       // available versions(as in Jan. 2022): 5.4.4, 5.5.0, 5.6.0, 5.7.0
     debugPort = 5566 // (optional) when you use a java debugger, no need when use IDEs
-    pluginClass = "your.plugin.package.and.className" // mandatory for plugin development
-    pluginName = "Human readable plugin name"  // when property plugin.name dees not exist this is used
 }
 ```
 
@@ -157,18 +155,22 @@ plugin.license=GNU General Public License version 3
 
 Here is a table how properties becomes manifest record;
 
-|                    | plugin manifest    | gradle.properties    | standard property   | omegat extension |
-|--------------------|--------------------|----------------------|---------------------|------------------|
-| Name               | Plugin-Name        | `plugin.name`        | n/a                 | `pluginName`     |
-| Version            | Plugin-Version     | n/a                  | version             | n/a              |
-| Author             | Plugin-Author      | `plugin.author`      | n/a                 | n/a              |
-| Description        | Plugin-Description | `plugin.description` | n/a                 | n/a              |
-| Website            | Plugin-Link        | `plugin.link`        | n/a                 | n/a              |
-| Category           | Plugin-Category    | `plugin.category`    | n/a                 | n/a              |
-| Built environment  | Created-By         | n/a                  | n/a                 | n/a              |
-| Date               | Plugin-Date        | n/a                  | n/a                 | n/a              |
-| Class name         | OmegaT-Plugins     | n/a                  | n/a                 | n/a              |
+|                    | plugin manifest    | gradle.properties    | standard property   | 
+|--------------------|--------------------|----------------------|---------------------|
+| Name               | Plugin-Name        | `plugin.name`        | n/a                 | 
+| Author             | Plugin-Author      | `plugin.author`      | n/a                 | 
+| Description        | Plugin-Description | `plugin.description` | n/a                 | 
+| Website            | Plugin-Link        | `plugin.link`        | n/a                 | 
+| Category           | Plugin-Category    | `plugin.category`    | n/a                 | 
+| Version            | Plugin-Version     | n/a                  | version             | 
+| Built environment  | Created-By         | n/a                  | n/a                 | 
+| Date               | Plugin-Date        | n/a                  | n/a                 | 
+| Class name         | OmegaT-Plugins     | n/a                  | n/a                 | 
 
-- Plugin Name can be configured with `plugin.name` property. When it is not set, it is configured by using extension `omegat.pluginName` in `build.gradle`.
 - Built environment and date records are automatically added to manifest.
 - Class name is configured by extension `omegat.pluginClass` in `build.gradle`.
+
+## Imcompatible change
+
+An extension `omegat.pluginName` is deprecated and will be removed in future verion.
+You should set `plugin.name` property for the purpose.
