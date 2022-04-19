@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm") version "1.6.20"
+    kotlin("jvm") version "1.6.21"
     id("java-gradle-plugin")  // for plugin authoring
     id ("maven-publish")  // for metadata
     id("com.gradle.plugin-publish") version "0.21.0"  // for publish to plugin portal
