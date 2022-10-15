@@ -6,7 +6,6 @@ import org.gradle.api.tasks.util.PatternFilterable
 
 
 open class PluginExtension(project: Project) {
-    var pluginName: String? = null
     var projectDir: String? = null
     var version: String? = null
     var pluginClass: String? = null
